@@ -1,0 +1,22 @@
+snippet cp
+  #include <bits/stdc++.h>
+  using namespace std;
+  typedef long long ll;
+  int x4[4] = {1, -1, 0, 0};
+  int y4[4] = {0, 0, 1, -1};
+  int x8[8] = {1, -1, 0, 0, 1, 1, -1, -1};
+  int y8[8] = {0, 0, 1, -1, 1, -1, 1, -1};
+  long long int gcd(long long int a, long int b) {
+    if (b == 0) return a;
+    return gcd(b, a%b);
+  }
+  long long int lcm(long long int a, long long int b) {
+    return a*b / gcd(a, b);
+  }
+
+  int main() {
+    cin.tie(0); ios::sync_with_stdio(false);
+    
+    ${0:TARGET}
+
+  }

@@ -1,0 +1,49 @@
+[[plugins]]
+repo = 'Shougo/defx.nvim'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = '''
+  let g:deoplete#enable_at_startup = 1
+  set completeopt-=preview
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+hook_add = '''
+  let g:neosnippet#snippets_directory = '~/.vim/snippets/'
+  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k>     <Plug>(neosnippet_expand_target)
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+'''  
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'w0ng/vim-hybrid'
+
+[[plugins]]
+repo = 'morhetz/gruvbox'
+
+[[plugins]]
+repo = 'tyrannicaltoucan/vim-quantum'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  let g:lightline = {
+      \ 'colorscheme': 'quantum',
+      \ }
+'''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+[[plugins]]
+repo = 'ap/vim-css-color'
