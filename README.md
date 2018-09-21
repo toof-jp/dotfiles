@@ -2,4 +2,4 @@
 my dotfiles!
 
 # link
-`ln -sf ~/dotfiles/snippets ~/.vim`  
+`ln -sf ~/dotfiles/.config/nvim/snippets ~/.vim`  
