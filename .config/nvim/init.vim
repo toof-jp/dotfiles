@@ -31,8 +31,8 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 tnoremap <silent> <esc> <C-\><C-n>
-autocmd FileType python nnoremap <C-e> :te python %<Return>
-autocmd FileType cpp nnoremap <C-e> :te g++-8 % && echo "OK" && ./a.out && rm a.out<Return>
+autocmd FileType python nnoremap <C-e> :te python %<CR>
+autocmd FileType cpp nnoremap <C-e> :te g++-8 % && echo "OK" && ./a.out && rm a.out<CR>
 set clipboard+=unnamedplus
 
 autocmd ColorScheme * hi LineNr guibg=#2a2e34 guifg=#aebbc5
