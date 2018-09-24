@@ -1,6 +1,7 @@
 snippet cp
 options head
-  il = lambda: list(map(int, input().split()))
+  from sys import stdin
+  il = lambda func=int: list(map(func, stdin.readline().rstrip().split()))
   ils = lambda n, s="int(input())": [eval(s) for _ in range(n)]
 
   ${0:TARGET}
