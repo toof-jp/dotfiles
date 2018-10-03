@@ -2,6 +2,15 @@ snippet cp
   #include <bits/stdc++.h>
   using namespace std;
   typedef long long ll;
+
+  int main() {
+    cin.tie(0); ios::sync_with_stdio(false);
+    
+    ${0:TARGET}
+
+  }
+
+snippet a
   int x4[4] = {1, -1, 0, 0};
   int y4[4] = {0, 0, 1, -1};
   int x8[8] = {1, -1, 0, 0, 1, 1, -1, -1};
@@ -12,11 +21,4 @@ snippet cp
   }
   long long int lcm(long long int a, long long int b) {
     return a*b / gcd(a, b);
-  }
-
-  int main() {
-    cin.tie(0); ios::sync_with_stdio(false);
-    
-    ${0:TARGET}
-
   }
