@@ -26,11 +26,14 @@ let g:netrw_dirhistmax = 0
 set encoding=utf-8
 set number
 set cursorline
+set list
+set clipboard+=unnamedplus
+
 set tabstop=2
 set shiftwidth=2
 set expandtab
+
 tnoremap <silent> <esc> <C-\><C-n>
-set clipboard+=unnamedplus
 
 autocmd ColorScheme * hi LineNr guibg=#2a2e34 guifg=#aebbc5
 autocmd ColorScheme * hi CursorLineNr guibg=#658494 guifg=#2a2e34
