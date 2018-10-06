@@ -2,6 +2,7 @@
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # alias
+alias sl='ls'
 alias ls='ls -G'
 alias lsa='ls -a'
 alias v='nvim'
