@@ -6,6 +6,7 @@ alias sl='ls'
 alias ls='ls -G'
 alias lsa='ls -a'
 alias v='nvim'
+alias pwdcp='pwd | pbcopy'
 
 # tmux
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
