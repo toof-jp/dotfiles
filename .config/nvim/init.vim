@@ -22,7 +22,7 @@ if dein#check_install()
 endif
 
 
-let g:netrw_dirhistmax = 0
+let g:netrw_dirhistmax=0
 set encoding=utf-8
 set number
 set cursorline

@@ -82,9 +82,6 @@ repo = 'Shougo/neosnippet-snippets'
 repo = 'w0ng/vim-hybrid'
 
 [[plugins]]
-repo = 'morhetz/gruvbox'
-
-[[plugins]]
 repo = 'tyrannicaltoucan/vim-quantum'
 
 [[plugins]]
