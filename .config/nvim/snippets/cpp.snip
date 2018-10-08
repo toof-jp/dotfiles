@@ -12,6 +12,17 @@ snippet cp
 
   }
 
+snippet rep
+  rep(${1:i}, ${2}) {
+    ${3:TARGET}
+  }
+
+snippet FOR
+alias for
+  FOR(${1:i}, ${2}, ${3}) {
+    ${4:TARGET}
+  }
+
 snippet a
   int x4[4] = {1, -1, 0, 0};
   int y4[4] = {0, 0, 1, -1};
@@ -23,9 +34,4 @@ snippet a
   }
   long long int lcm(long long int a, long long int b) {
     return a*b / gcd(a, b);
-  }
-
-snippet rep
-  rep(${1:i},${2}) {
-    ${3}
   }
