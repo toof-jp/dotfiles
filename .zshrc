@@ -1,6 +1,5 @@
 # path
 export XDG_CONFIG_HOME="$HOME/.config"
-PATH="$HOME/cquery/build/release/bin:$PATH"
 
 # alias
 alias sl='ls'
