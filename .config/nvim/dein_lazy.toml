@@ -1,23 +1,26 @@
-[[plugins]]
-repo = 'zchee/deoplete-jedi'
-on_ft = ['python']
+#[[plugins]]
+#repo = 'zchee/deoplete-jedi
+#on_ft = ['python']
 
 [[plugins]]
 repo = 'octol/vim-cpp-enhanced-highlight'
 on_ft = ['cpp']
 
-# [[plugins]]
-# repo = 'autozimu/LanguageClient-neovim'
-# on_ft = ['cpp']
-# rev = 'next'
-# build = 'bash install.sh'
-# hook_add = '''
-#   set hidden
-# 
-#   let g:LanguageClient_serverCommands = {
-#     \ }
-# 
-#   nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-#   nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-#   nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-# '''
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+on_ft = ['cpp', 'python']
+rev = 'next'
+build = 'bash install.sh'
+hook_add = '''
+  set hidden
+
+ let g:LanguageClient_serverCommands = {
+    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery/"}'],
+    \ 'python': ['~/.local/bin/pyls']
+    \ }
+
+  nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+  nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+  let g:LanguageClient_autoStart = 1
+'''
