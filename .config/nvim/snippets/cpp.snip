@@ -4,12 +4,13 @@ snippet cp
   typedef long long ll;
   typedef pair<int, int> pii;
   #define rep(i, n) for(ll i = 0;i < n;i++)
+  template<class T, class U> void chmax(T& a, U b) { if (a<b) a = b; }
+  template<class T, class U> void chmin(T& a, U b) { if (a>b) a = b; }
 
   int main() {
     cin.tie(0); ios::sync_with_stdio(false);
 
     ${0:TARGET}
-
   }
 
 snippet rep
@@ -44,9 +45,7 @@ snippet dijkstra
     return d;
   }
 
-snippet a
-  int x4[4] = {1, -1, 0, 0};
-  int y4[4] = {0, 0, 1, -1};
+snippet hoge
   int x8[8] = {1, -1, 0, 0, 1, 1, -1, -1};
   int y8[8] = {0, 0, 1, -1, 1, -1, 1, -1};
   long long int gcd(long long int a, long int b) {
