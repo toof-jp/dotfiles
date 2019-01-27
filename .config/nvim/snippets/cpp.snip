@@ -45,6 +45,45 @@ snippet dijkstra
     return d;
   }
 
+snippet unionfind
+  class UnionFind {
+  private:
+    vector<int> parent;
+    vector<int> rank;
+
+  public:
+    UnionFind(int size) : parent(size), rank(size, 0) {
+      for (int i = 0; i < size; i++) {
+        parent[i] = i;
+      }
+    }
+
+    int find(int x) {
+      if (parent[x] == x) {
+        return x;
+      } else {
+        return parent[x] = find(parent[x]);
+      }
+    }
+
+    void unite(int x, int y) {
+      x = find(x);
+      y = find(y);
+      if (x == y) return;
+
+      if (rank[x] < rank[y]) {
+        parent[x] = y;
+      } else {
+        parent[y] = x;
+        if (rank[x] == rank[y]) rank[x]++;
+      }
+    }
+
+    bool same(int x, int y) {
+      return find(x) == find(y);
+    }
+  };
+
 snippet hoge
   int x8[8] = {1, -1, 0, 0, 1, 1, -1, -1};
   int y8[8] = {0, 0, 1, -1, 1, -1, 1, -1};
