@@ -14,7 +14,7 @@ build = 'bash install.sh'
 hook_add = '''
   set hidden
 
- let g:LanguageClient_serverCommands = {
+  let g:LanguageClient_serverCommands = {
     \ 'cpp': ['cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"/tmp/cquery/"}'],
     \ 'python': ['~/.local/bin/pyls']
     \ }
@@ -23,4 +23,5 @@ hook_add = '''
   nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
   nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
   let g:LanguageClient_autoStart = 1
+  let g:LanguageClient_diagnosticsEnable = 0
 '''
