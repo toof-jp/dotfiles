@@ -1,10 +1,9 @@
-exec --no-startup-id compton --config ~/.config/compton.conf -b
+#exec --no-startup-id compton --config ~/.config/compton.conf -b
 exec --no-startup-id nm-applet
 exec --no-startup-id fcitx-autostart
 exec --no-startup-id xhost +SI:localuser:root
 exec --no-startup-id sudo xkeysnail ~/.config/xkeysnail/config.py
-exec --no-startup-id xinput set-prop 12 300 -0.8
-exec --no-startup-id xinput set-prop 11 288 1
+exec --no-startup-id xinput set-prop 11 296 1
 
 # audio control
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
@@ -47,7 +46,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec ~/.cargo/bin/alacritty
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
