@@ -1,7 +1,3 @@
-#[[plugins]]
-#repo = 'zchee/deoplete-jedi
-#on_ft = ['python']
-
 [[plugins]]
 repo = 'octol/vim-cpp-enhanced-highlight'
 on_ft = ['cpp']
