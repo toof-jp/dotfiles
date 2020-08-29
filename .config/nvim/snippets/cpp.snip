@@ -1,99 +1,77 @@
 snippet cp
-  #include <bits/stdc++.h>
-  using namespace std;
-  using ll = long long;
-  using pii = pair<int, int>;
-  using vi = vector<int>;
-  using vl = vector<ll>;
-  #define rep(i, n) for(ll i = 0;i < n;i++)
-  #define all(i) i.begin(), i.end()
-  template<class T, class U> bool cmax(T& a, U b) { if (a<b) {a = b; return true;} else return false; }
-  template<class T, class U> bool cmin(T& a, U b) { if (a>b) {a = b; return true;} else return false; }
+  #include "../../library/template.hpp"
 
   int main() {
-    cin.tie(0); ios::sync_with_stdio(false);
-
     ${0:TARGET}
   }
+
+snippet in
+  #include "../../library/${0:TARGET}"
 
 snippet rep
   rep(${1:i}, ${2}) {
     ${3:TARGET}
   }
 
-snippet FOR
-alias for
-  FOR(${1:i}, ${2}, ${3}) {
+snippet rep3
+  rep3(${1:i}, ${2}, ${3}) {
     ${4:TARGET}
   }
 
-snippet dijkstra
-  vector<int> dijkstra(int s, vector<vector<pii>> G) {
-    priority_queue<pii, vector<pii>, greater<pii>> que;
-    vector<int> d(n, INF);
-    d[s] = 0;
-    que.push(pii(0, s));
-
-    while(!que.empty()) {
-      pii p = que.top(); que.pop();
-      int v = p.second;
-      if (d[v] < p.first) continue;
-      for (auto&& e : G[v]) {
-        if (d[e.first] > d[v] + e.second) {
-          d[e.first] = d[v] + e.second;
-          que.push(pii(d[e.first], e.first));
-        }
-      }
-    }
-    return d;
+snippet per
+  per(${1:i}, ${2}) {
+    ${3:TARGET}
   }
 
-snippet unionfind
-  class UnionFind {
-  private:
-    vector<int> parent;
-    vector<int> rank;
-
-  public:
-    UnionFind(int size) : parent(size), rank(size, 0) {
-      for (int i = 0; i < size; i++) {
-        parent[i] = i;
-      }
-    }
-
-    int find(int x) {
-      if (parent[x] == x) {
-        return x;
-      } else {
-        return parent[x] = find(parent[x]);
-      }
-    }
-
-    void unite(int x, int y) {
-      x = find(x);
-      y = find(y);
-      if (x == y) return;
-
-      if (rank[x] < rank[y]) {
-        parent[x] = y;
-      } else {
-        parent[y] = x;
-        if (rank[x] == rank[y]) rank[x]++;
-      }
-    }
-
-    bool same(int x, int y) {
-      return find(x) == find(y);
-    }
-  };
-
-snippet hoge
-  int x8[8] = {1, -1, 0, 0, 1, 1, -1, -1};
-  int y8[8] = {0, 0, 1, -1, 1, -1, 1, -1};
-  long long int gcd(long long int a, long int b) {
-    if (b == 0) return a;
-    return gcd(b, a%b);
+snippet per3
+  per3(${1:i}, ${2}, ${3}) {
+    ${4:TARGET}
   }
-  long long int lcm(long long int a, long long int b) {
-    return a*b / gcd(a, b);
+
+snippet     forr
+options     head
+abbr        for (:) {}
+  for (${1:auto&& }${2:var} : ${3:container}) {
+    ${0:TARGET}
   }
+
+snippet tem
+  #include <bits/stdc++.h>
+  using namespace std;
+
+  using ll = long long;
+  using pl = pair<ll, ll>;
+  using vl = vector<ll>;
+  #define rep(i, n) for(ll i = 0; i < (ll)n; i++)
+  #define rep3(i, l, r) for(ll i = l; i < (ll)r; i++)
+  #define per(i, n) for(ll i = n-1; i >= 0; i--)
+  #define per3(i, l, r) for(ll i = r-1; i >= (ll)l; i--)
+  #define all(v) begin(v), end(v)
+  template<class T, class U>
+  inline void cmax(T& a, U b) { if (a < b) a = b; }
+  template<class T, class U>
+  inline void cmin(T& a, U b) { if (a > b) a = b; }
+
+  struct IoSetup {
+    IoSetup() {
+      cin.tie(nullptr);
+      ios::sync_with_stdio(false);
+      cout << fixed << setprecision(15);
+      cerr << fixed << setprecision(15);
+    }
+  } io_setup;
+
+  constexpr char el = '\n';
+
+  int main() {
+    ${0:TARGET}
+  }
+
+snippet yy
+  cout << (${1} ? "Yes" : "No") << el;
+
+snippet YY
+  cout << (${1} ? "YES" : "NO") << el;
+
+snippet Yy
+  cout << (${1} ? "yes" : "no") << el;

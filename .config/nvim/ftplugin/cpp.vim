@@ -1,6 +1,9 @@
-nnoremap <buffer> <C-e> :te g++ -O2 -Wall % && echo "OK" && ./a.out && rm a.out<CR>
+" compile and run
+nnoremap <buffer> <C-e> :w<CR> :te g++ -std=gnu++17 -O2 -Wall -Wshadow -DLOCAL % && echo "OK" && ./a.out && rm a.out<CR>
+" copy
+nnoremap <buffer> <C-w> :w<CR> :! oj-bundle % \| xclip -selection c<CR><CR>
 
-" cquery config
-" http://kutimoti.hatenablog.com/entry/2018/06/09/165225
+" ccls config
+" https://github.com/MaskRay/ccls/wiki/Customization#compile_commandsjson-file
 let filename = expand('%:p')
-echo system('echo ''[{"directory": "/home/kutimoti/contest","command": "/usr/bin/c++  ' . filename . ' -std=c++1y","file": "' . filename . '"}]'' > compile_commands.json')
+echo system('echo ''[{"directory": "/home/toof/working/cp","command": "/usr/bin/gcc ' . filename . ' -std=gnu++17","file": "' . filename . '"}]'' > compile_commands.json')

@@ -1,3 +1,4 @@
+exec --no-startup-id xrandr --output DP-4 --auto --output HDMI-0 --scale 1.25x1.25 --right-of DP-4
 exec --no-startup-id compton --config ~/.config/compton.conf -b
 exec --no-startup-id sudo hda-verb /dev/snd/hwC0D0 0x1d SET_PIN_WIDGET_CONTROL 0x0
 exec --no-startup-id nm-applet
