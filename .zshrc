@@ -11,16 +11,4 @@ alias pwdcp='pwd | pbcopy'
 # tmux
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
 
-# plugin
-#source ~/.zplug/init.zsh
-#
-#zplug "zsh-users/zsh-syntax-highlighting", defer:3
-#
-#if ! zplug check --verbose; then
-#    printf "Install? [y/N]: 
-#    if read -q; then
-#        echo; zplug install
-#    fi
-#fi
-#
-#zplug load --verbose
+cd
