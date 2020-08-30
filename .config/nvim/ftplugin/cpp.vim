@@ -1,7 +1,13 @@
 " compile and run
 nnoremap <buffer> <C-e> :w<CR> :te g++ -std=gnu++17 -O2 -Wall -Wshadow -DLOCAL % && echo "OK" && ./a.out && rm a.out<CR>
 " copy
-nnoremap <buffer> <C-w> :w<CR> :! oj-bundle % \| xclip -selection c<CR><CR>
+" WSL
+if system('uname -a | egrep [Mm]icrosoft') != ''
+  nnoremap <buffer> <C-w> :w<CR> :! oj-bundle % \| win32yank.exe -i<CR><CR>
+" Linux
+else
+  nnoremap <buffer> <C-w> :w<CR> :! oj-bundle % \| xclip -selection c<CR><CR>
+endif
 
 " ccls config
 " https://github.com/MaskRay/ccls/wiki/Customization#compile_commandsjson-file
