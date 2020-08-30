@@ -64,29 +64,29 @@
     // Add custom color schemes to this array.
     // To learn more about color schemes, visit https://aka.ms/terminal-color-schemes
     "schemes": [
-{
-"name" : "Alacritty",
+        {
+            "name" : "Alacritty",
 
-"background" : "#27292c",
-"foreground" : "#d0d2d1",
+            "background" : "#27292c",
+            "foreground" : "#d0d2d1",
 
-"black" : "#35383b",
-"blue" : "#7693ac",
-"cyan" : "#749e99",
-"green" : "#769972",
-"purple" : "#977ba0",
-"red" : "#b05655",
-"white" : "#848b92",
-"yellow" : "#e1a574",
-"brightBlack" : "#484c52",
-"brightBlue" : "#96b1c9",
-"brightCyan" : "#9fc9c3",
-"brightGreen" : "#dffebe",
-"brightPurple" : "#bfa5c7",
-"brightRed" : "#d27c7b",
-"brightWhite" : "#fcf7e2",
-"brightYellow" : "#f0d189"
-},
+            "black" : "#35383b",
+            "blue" : "#7693ac",
+            "cyan" : "#749e99",
+            "green" : "#769972",
+            "purple" : "#977ba0",
+            "red" : "#b05655",
+            "white" : "#848b92",
+            "yellow" : "#e1a574",
+            "brightBlack" : "#484c52",
+            "brightBlue" : "#96b1c9",
+            "brightCyan" : "#9fc9c3",
+            "brightGreen" : "#dffebe",
+            "brightPurple" : "#bfa5c7",
+            "brightRed" : "#d27c7b",
+            "brightWhite" : "#fcf7e2",
+            "brightYellow" : "#f0d189"
+        },
     ],
 
     // Add custom keybindings to this array.
@@ -97,8 +97,8 @@
         // Copy and paste are bound to Ctrl+Shift+C and Ctrl+Shift+V in your defaults.json.
         // These two lines additionally bind them to Ctrl+C and Ctrl+V.
         // To learn more about selection, visit https://aka.ms/terminal-selection
-        { "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+c" },
-        { "command": "paste", "keys": "ctrl+v" },
+        { "command": {"action": "copy", "singleLine": false }, "keys": "alt+c" },
+        { "command": "paste", "keys": "alt+v" },
 
         // Press Ctrl+Shift+F to open the search box
         { "command": "find", "keys": "ctrl+shift+f" },
@@ -110,4 +110,3 @@
         { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" }
     ]
 }
-
