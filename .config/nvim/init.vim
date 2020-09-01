@@ -33,6 +33,7 @@ set inccommand=split
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set conceallevel=0
 
 inoremap <C-f> <esc>
 tnoremap <silent> <esc> <C-\><C-n>
