@@ -7,8 +7,10 @@ export PATH=$PATH:/home/toof/.local/bin
 # alias
 alias sl='ls --color'
 alias ls='ls --color'
-alias lsa='ls --color -a'
+alias la='ls --color -a'
 alias v='nvim'
+alias e='nvim'
+alias g='git'
 
 # tmux
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
