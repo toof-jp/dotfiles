@@ -12,6 +12,13 @@ alias v='nvim'
 alias e='nvim'
 alias g='git'
 
+# alias for WSL
+if uname -r | grep -iq 'microsoft'; then
+  alias pbcopy='win32yank.exe -i'
+  alias pbpaste='win32yank.exe -o'
+  alias open='explorer.exe'
+fi
+
 # tmux
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
 
