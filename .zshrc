@@ -15,7 +15,7 @@ alias g='git'
 # alias for WSL
 if uname -r | grep -iq 'microsoft'; then
   alias pbcopy='win32yank.exe -i'
-  alias pbpaste='win32yank.exe -o'
+  alias pbpaste='win32yank.exe -o --lf'
   alias open='explorer.exe'
 fi
 
