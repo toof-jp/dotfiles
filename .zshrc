@@ -24,5 +24,3 @@ fi
 
 PROMPT='%F{yellow}%~%f
 > '
-
-cd

@@ -54,7 +54,8 @@
                 "source": "Windows.Terminal.Wsl",
                 "colorScheme": "Alacritty",
                 "cursorShape": "emptyBox",
-                "scrollbarState": "hidden"
+                "scrollbarState": "hidden",
+                "startingDirectory": "//wsl$/Arch/home/toof"
             },
             {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
