@@ -5,13 +5,3 @@ options head
 	ils = lambda n, s="int(input())": [eval(s) for _ in range(n)]
 
 	${0:TARGET}
-
-snippet gcd
-	def gcd(a, b):
-		if a < b: return gcd(b, a)
-		if b == 0: return a
-		return gcd(b, a%b)
-
-snippet lcm
-	def lcm(a, b):
-		return a*b // gcd(a, b)
