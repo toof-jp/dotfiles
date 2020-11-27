@@ -1,5 +1,6 @@
 " compile and run
-nnoremap <buffer> <C-e> :w<CR> :te g++ -std=gnu++17 -O2 -Wall -Wshadow -DLOCAL % && echo "Done" && ./a.out && rm a.out<CR>
+nnoremap <buffer> <C-e> :w<CR> :te g++ -std=gnu++17 -O3 -Wall -Wshadow -DLOCAL % && echo "Done" && ./a.out && rm a.out<CR>
+
 " copy
 " WSL
 if system('uname -a | egrep [Mm]icrosoft') != ''
