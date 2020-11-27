@@ -29,6 +29,7 @@ set cursorline
 set list
 set clipboard+=unnamedplus
 set inccommand=split
+set shellcmdflag=-ic
 
 set tabstop=2
 set shiftwidth=2
