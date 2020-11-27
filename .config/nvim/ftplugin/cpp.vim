@@ -9,7 +9,6 @@ else
   nnoremap <buffer> <C-w> :w<CR> :! oj-bundle % \| xclip -selection c<CR><CR>
 endif
 
-" ccls config
-" https://github.com/MaskRay/ccls/wiki/Customization#compile_commandsjson-file
-let filename = expand('%:p')
-echo system('echo ''[{"directory": "/home/toof/working/cp","command": "/usr/bin/gcc ' . filename . ' -std=gnu++17","file": "' . filename . '"}]'' > compile_commands.json')
+" ccls
+" https://github.com/MaskRay/ccls/wiki/Project-Setup#ccls-file
+echo system("echo '/usr/bin/gcc\n-std=gnu++17\n-I/home/toof/working/library/src\n' > .ccls")
