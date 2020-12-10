@@ -11,6 +11,9 @@ alias la='ls --color -a'
 alias v='nvim'
 alias e='nvim'
 alias g='git'
+alias -g ...=../..
+alias -g ....=../../..
+alias -g .....=../../../..
 
 # alias for WSL
 if uname -r | grep -iq 'microsoft'; then
