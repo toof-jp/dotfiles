@@ -16,7 +16,7 @@ hook_add = '''
 
   let g:LanguageClient_serverCommands = {
     \ 'cpp': ['ccls'],
-    \ 'python': ['/usr/bin/pyls']
+    \ 'python': ['pyls']
     \ }
 
   nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
