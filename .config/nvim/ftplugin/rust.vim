@@ -1,1 +1,1 @@
-nnoremap <buffer> <C-e> :te cargo run<CR>
+nnoremap <buffer> <C-e> :w<CR> :te cargo run<CR>
