@@ -5,7 +5,8 @@ export PATH=$PATH:/home/toof/.local/bin
 # alias
 alias l='ls --color'
 alias la='ls --color -a'
-alias e='nvim'
+alias v='nvim'
+alias cat='bat'
 alias g='git'
 alias gs='git status'
 alias -g ...=../..
