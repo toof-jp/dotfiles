@@ -1,4 +1,9 @@
 # dotfiles
 my dotfiles!
 
-`ln -sf ~/dotfiles/.config/nvim/snippets ~/.vim`
+## Installation
+```
+git clone https://github.com/toof-jp/dotfiles.git
+cd dotfiles
+bash install.sh
+```
