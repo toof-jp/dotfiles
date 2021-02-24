@@ -1,3 +1,3 @@
-ln -sf ${CURDIR}/.zshrc ~/.zshrc
-ln -sf ${CURDIR}/.tmux.conf ~/.tmux.conf
-ln -sf ${CURDIR}/.config ~/.config
+ln -sf ${PWD}/.zshrc ~/.zshrc
+ln -sf ${PWD}/.tmux.conf ~/.tmux.conf
+ln -sf ${PWD}/.config ~/.config
