@@ -12,6 +12,7 @@ alias gs='git status'
 alias -g ...=../..
 alias -g ....=../../..
 alias -g .....=../../../..
+alias -g L='| less'
 
 # alias for WSL
 if uname -r | grep -iq 'microsoft'; then
