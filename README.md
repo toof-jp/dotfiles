@@ -5,5 +5,5 @@ my dotfiles!
 ```
 git clone https://github.com/toof-jp/dotfiles.git
 cd dotfiles
-bash install.sh
+sh install.sh
 ```
