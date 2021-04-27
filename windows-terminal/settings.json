@@ -33,7 +33,9 @@
             "colorScheme": "Alacritty",
             "cursorShape": "emptyBox",
             "scrollbarState": "hidden",
-            "startingDirectory": "//wsl$/Arch/home/toof"
+            "startingDirectory": "//wsl$/Arch/home/toof",
+            "fontFace": "Inconsolata",
+            "fontSize": 14,
         },
         "list":
         [
@@ -62,6 +64,24 @@
                 "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{96be24fd-152c-5812-90bb-b4bd046f9785}",
+                "hidden": false,
+                "name": "Arch2",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{3a892c7d-62d6-5887-95f7-9bf34609cf06}",
+                "hidden": false,
+                "name": "Arch3",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{bf162b9f-a49a-5771-a082-4bd3054277df}",
+                "hidden": false,
+                "name": "Arch4",
+                "source": "Windows.Terminal.Wsl"
             }
         ]
     },
