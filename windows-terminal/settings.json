@@ -36,6 +36,7 @@
             "startingDirectory": "//wsl$/Arch/home/toof",
             "fontFace": "Inconsolata",
             "fontSize": 14,
+            "fontWeight": "medium",
         },
         "list":
         [
