@@ -36,7 +36,7 @@
             "cursorShape": "emptyBox",
             "scrollbarState": "hidden",
             "startingDirectory": "//wsl$/Arch/home/toof",
-            "fontFace": "Inconsolata",
+            "fontFace": "Consolas",
             "fontSize": 14,
             "fontWeight": "medium",
         },
