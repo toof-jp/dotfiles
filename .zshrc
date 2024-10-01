@@ -1,5 +1,6 @@
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
+export PATH=$HOME/.cargo/bin:$PATH
 
 # alias
 alias cat='bat'
@@ -29,3 +30,5 @@ fi
 
 PROMPT='%F{yellow}%~%f
 > '
+
+. "$HOME/.cargo/env"
