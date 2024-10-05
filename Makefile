@@ -1,4 +1,4 @@
-all: zsh git tmux neovim
+all: zsh git tmux ssh neovim
 
 zsh:
 	ln -sf ${PWD}/.zshrc ${HOME}/.zshrc
@@ -10,6 +10,9 @@ git:
 tmux:
 	mkdir -p ${HOME}/.config
 	ln -sf ${PWD}/.config/tmux ~/.config
+
+ssh:
+	ln -sf ${PWD}/.ssh ~
 
 neovim:
 	mkdir -p ${HOME}/.config
