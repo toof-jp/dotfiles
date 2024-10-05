@@ -12,7 +12,7 @@ tmux:
 	ln -sf ${PWD}/.config/tmux ~/.config
 
 ssh:
-	ln -sf ${PWD}/.ssh ~
+	ln -sf ${PWD}/.ssh/config ~/.ssh
 
 neovim:
 	mkdir -p ${HOME}/.config
