@@ -1,4 +1,5 @@
 *.out
 .ccls
 .ccls-cache/
+.vscode/
 compile_commands.json
