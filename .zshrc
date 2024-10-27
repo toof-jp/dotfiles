@@ -1,6 +1,8 @@
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
 export PATH=$HOME/.cargo/bin:$PATH
+# cursor path
+export PATH=/mnt/c/Users/user/AppData/Local/Programs/cursor/resources/app/bin:$PATH
 
 # alias
 alias cat='bat'
