@@ -4,3 +4,6 @@
 [user]
   name = toof
   email = toof@toof.jp
+
+[diff]
+  external = difft
