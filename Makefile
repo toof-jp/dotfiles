@@ -1,4 +1,4 @@
-all: zsh git tmux ssh neovim
+all: zsh git tmux ssh neovim rustfmt
 
 zsh:
 	ln -sf ${PWD}/.zshrc ${HOME}/.zshrc
@@ -18,4 +18,8 @@ neovim:
 	mkdir -p ${HOME}/.config
 	ln -sf ${PWD}/.config/nvim ~/.config
 
-.PHONY: all zsh git tmux neovim
+rustfmt:
+	mkdir -p ${HOME}/.config
+	ln -sf ${PWD}/.config/rustfmt ~/.config
+
+.PHONY: all zsh git tmux ssh neovim rustfmt

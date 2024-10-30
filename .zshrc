@@ -3,6 +3,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export PATH=$HOME/.cargo/bin:$PATH
 # cursor path
 export PATH=/mnt/c/Users/user/AppData/Local/Programs/cursor/resources/app/bin:$PATH
+export RUSTUP_TOOLCHAIN=nightly
 
 # alias
 alias cat='bat'
