@@ -5,5 +5,8 @@
   name = toof
   email = toof@toof.jp
 
+[alias]
+  pull = pull --all
+
 [diff]
   external = difft
