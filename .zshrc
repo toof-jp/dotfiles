@@ -6,6 +6,7 @@ export PATH=/mnt/c/Users/user/AppData/Local/Programs/cursor/resources/app/bin:$P
 export RUSTUP_TOOLCHAIN=nightly
 
 # alias
+alias c='cursor .'
 alias cat='bat'
 alias cg='cd $(ghq list -p | fzf)'
 alias g='git'
