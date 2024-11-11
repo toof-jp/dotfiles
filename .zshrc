@@ -18,6 +18,7 @@ alias l='ls --color'
 alias la='ls --color -a'
 alias ll='ls --color -al'
 alias v='nvim'
+alias toof='cd ~/ghq/github.com/toof-jp'
 alias -g ...=../..
 alias -g ....=../../..
 alias -g .....=../../../..
