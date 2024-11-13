@@ -24,6 +24,13 @@ alias -g ....=../../..
 alias -g .....=../../../..
 alias -g L='| less'
 
+# secret config
+ZSH_SECRET_CONF="${HOME}/.zshrc.secret"
+
+if [ -e "${ZSH_SECRET_CONF}" ]; then
+  source "${ZSH_SECRET_CONF}"
+fi
+
 # alias for WSL
 if uname -r | grep -iq 'microsoft'; then
   alias open='explorer.exe'

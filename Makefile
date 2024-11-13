@@ -2,6 +2,7 @@ all: zsh git tmux ssh neovim cargo rustfmt
 
 zsh:
 	ln -sf ${PWD}/.zshrc ${HOME}/.zshrc
+	ln -sf ${PWD}/.zshrc.secret ${HOME}/.zshrc.secret
 
 git:
 	mkdir -p ${HOME}/.config
