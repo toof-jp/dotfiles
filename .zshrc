@@ -24,6 +24,7 @@ alias -g ....=../../..
 alias -g .....=../../../..
 alias -g L='| less'
 
+# ghq list and cd
 function cg() {
   local selected
   if [ "$#" -eq 0 ]; then
@@ -48,7 +49,7 @@ if uname -r | grep -iq 'microsoft'; then
   alias pbpaste='win32yank.exe -o --lf'
 fi
 
-# tmux
+# start tmux
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
 
 PROMPT='%F{yellow}%~%f
