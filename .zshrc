@@ -4,11 +4,11 @@ export PATH=$HOME/.cargo/bin:$PATH
 # cursor path
 export PATH=/mnt/c/Users/user/AppData/Local/Programs/cursor/resources/app/bin:$PATH
 export RUSTUP_TOOLCHAIN=nightly
+source "$HOME/.cargo/env"
 
 # alias
 alias c='cursor .'
 alias cat='bat'
-alias cg='cd $(ghq list -p | fzf)'
 alias g='git'
 alias ga='git add .'
 alias gc='git commit -m "update"'
@@ -23,6 +23,14 @@ alias -g ...=../..
 alias -g ....=../../..
 alias -g .....=../../../..
 alias -g L='| less'
+
+function cg() {
+  if [ "$#" -eq 0 ]; then
+    cd "$(ghq root)/$(ghq list | fzf)"
+  elif [ "$#" -eq 1 ]; then
+    cd "$(ghq root)/$(ghq list | fzf --select-1 --query="$1")"
+  fi
+}
 
 # secret config
 ZSH_SECRET_CONF="${HOME}/.zshrc.secret"
@@ -43,5 +51,3 @@ fi
 
 PROMPT='%F{yellow}%~%f
 > '
-
-. "$HOME/.cargo/env"
