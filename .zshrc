@@ -25,11 +25,13 @@ alias -g .....=../../../..
 alias -g L='| less'
 
 function cg() {
+  local selected
   if [ "$#" -eq 0 ]; then
-    cd "$(ghq root)/$(ghq list | fzf)"
-  elif [ "$#" -eq 1 ]; then
-    cd "$(ghq root)/$(ghq list | fzf --select-1 --query="$1")"
+    selected=$(ghq list | fzf)
+  else
+    selected=$(ghq list | fzf --select-1 --query="$1")
   fi
+  [ -n "$selected" ] && cd "$(ghq root)/$selected"
 }
 
 # secret config
