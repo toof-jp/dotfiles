@@ -44,7 +44,8 @@ fi
 
 # alias for WSL
 if uname -r | grep -iq 'microsoft'; then
-  alias open='explorer.exe'
+  export BROWSER=wsl-open
+  alias open='wsl-open'
   alias pbcopy='win32yank.exe -i'
   alias pbpaste='win32yank.exe -o --lf'
 fi
