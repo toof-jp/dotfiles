@@ -1,6 +1,7 @@
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
 export PATH=$HOME/.cargo/bin:$PATH
+export EDITOR=nvim
 # cursor path
 export PATH=/mnt/c/Users/user/AppData/Local/Programs/cursor/resources/app/bin:$PATH
 export RUSTUP_TOOLCHAIN=nightly
@@ -19,6 +20,7 @@ alias la='ls --color -a'
 alias ll='ls --color -al'
 alias v='nvim'
 alias toof='cd ~/ghq/github.com/toof-jp'
+alias vps='~/vps.sh'
 alias -g ...=../..
 alias -g ....=../../..
 alias -g .....=../../../..
@@ -51,7 +53,7 @@ if uname -r | grep -iq 'microsoft'; then
 fi
 
 # start tmux
-[[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
+[[ -z "$TMUX" && ! -z "$PS1" && $TERM_RPOGRAM != "vscode" ]] && tmux
 
 PROMPT='%F{yellow}%~%f
 > '
