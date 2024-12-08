@@ -7,6 +7,15 @@ export PATH=/mnt/c/Users/user/AppData/Local/Programs/cursor/resources/app/bin:$P
 export RUSTUP_TOOLCHAIN=nightly
 source "$HOME/.cargo/env"
 
+# history
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+# keybind
+bindkey -d
+bindkey -e
+
 # alias
 alias c='cursor .'
 alias cat='bat'
