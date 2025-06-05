@@ -3,7 +3,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export PATH=$HOME/.cargo/bin:$PATH
 export EDITOR=nvim
 # cursor path
-export PATH=/mnt/c/Users/user/AppData/Local/Programs/cursor/resources/app/bin:$PATH
+export PATH=/mnt/c/Users/fmiya/AppData/Local/Programs/cursor/resources/app/bin:$PATH
 export RUSTUP_TOOLCHAIN=nightly
 source "$HOME/.cargo/env"
 
@@ -29,6 +29,8 @@ alias la='ls --color -a'
 alias ll='ls --color -al'
 alias v='nvim'
 alias toof='cd ~/ghq/github.com/toof-jp'
+## new repo
+alias nr='cd ~/ghq/github.com/toof-jp && gh repo create' 
 alias vps='~/vps.sh'
 alias -g ...=../..
 alias -g ....=../../..
@@ -46,6 +48,15 @@ function cg() {
   [ -n "$selected" ] && cd "$(ghq root)/$selected"
 }
 
+# ghq clone
+function cl() {
+  if [ "$#" -eq 0 ]; then
+    echo "Usage: cl <repository-url>"
+    return 1
+  fi
+  ghq clone $1
+}
+
 # secret config
 ZSH_SECRET_CONF="${HOME}/.zshrc.secret"
 
@@ -55,6 +66,7 @@ fi
 
 # alias for WSL
 if uname -r | grep -iq 'microsoft'; then
+  export WSL_DISTRO_NAME=Arch
   export BROWSER=wsl-open
   alias open='wsl-open'
   alias pbcopy='win32yank.exe -i'
