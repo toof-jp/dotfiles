@@ -31,7 +31,7 @@ alias v='nvim'
 alias toof='cd ~/ghq/github.com/toof-jp'
 ## new repo
 alias nr='cd ~/ghq/github.com/toof-jp && gh repo create' 
-alias vps='~/vps.sh'
+alias vps='ssh $(cat ~/vps-user-and-fqdn)'
 alias -g ...=../..
 alias -g ....=../../..
 alias -g .....=../../../..
