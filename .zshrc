@@ -37,6 +37,7 @@ alias -g ...=../..
 alias -g ....=../../..
 alias -g .....=../../../..
 alias -g L='| less'
+alias -g B="| echo '\a'"
 
 # ghq list and cd
 function cg() {
