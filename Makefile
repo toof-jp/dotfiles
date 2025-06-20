@@ -1,4 +1,4 @@
-all: zsh git tmux ssh neovim cargo rustfmt
+all: zsh git tmux ssh neovim cargo rustfmt claude
 
 zsh:
 	ln -sf ${PWD}/.zshrc ${HOME}/.zshrc
@@ -6,26 +6,31 @@ zsh:
 
 git:
 	mkdir -p ${HOME}/.config
-	ln -sf ${PWD}/.config/git ~/.config
+	ln -sf ${PWD}/.config/git ${HOME}/.config
 
 tmux:
 	mkdir -p ${HOME}/.config
-	ln -sf ${PWD}/.config/tmux ~/.config
+	ln -sf ${PWD}/.config/tmux ${HOME}/.config
 
 ssh:
 	mkdir -p ${HOME}/.ssh
-	ln -sf ${PWD}/.ssh/config ~/.ssh
+	ln -sf ${PWD}/.ssh/config ${HOME}/.ssh
 
 neovim:
 	mkdir -p ${HOME}/.config
-	ln -sf ${PWD}/.config/nvim ~/.config
+	ln -sf ${PWD}/.config/nvim ${HOME}/.config
 
 cargo:
 	mkdir -p ${HOME}/.cargo
-	ln -sf ${PWD}/.cargo/config.toml ~/.cargo
+	ln -sf ${PWD}/.cargo/config.toml ${HOME}/.cargo
 
 rustfmt:
 	mkdir -p ${HOME}/.config
-	ln -sf ${PWD}/.config/rustfmt ~/.config
+	ln -sf ${PWD}/.config/rustfmt ${HOME}/.config
 
-.PHONY: all zsh git tmux ssh neovim cargo rustfmt
+claude:
+	mkdir -p ${HOME}/.config
+	mkdir -p ${HOME}/.config/claude
+	ln -sf ${PWD}/.config/claude/settings.json ${HOME}/.config/claude
+
+.PHONY: all zsh git tmux ssh neovim cargo rustfmt claude
