@@ -18,7 +18,7 @@ bindkey -e
 
 # alias
 alias c='claude'
-alias cs='cursor .'
+alias cu='cursor .'
 alias cat='bat'
 alias g='git'
 alias ga='git add .'
