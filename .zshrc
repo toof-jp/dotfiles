@@ -76,7 +76,7 @@ if uname -r | grep -iq 'microsoft'; then
 fi
 
 # start tmux
-[[ -z "$TMUX" && ! -z "$PS1" && $TERM_RPOGRAM != "vscode" ]] && tmux
+[[ -z "$TMUX" && ! -z "$PS1" && "$TERM_PROGRAM" != "vscode" ]] && tmux
 
 PROMPT='%F{yellow}%~%f
 > '
