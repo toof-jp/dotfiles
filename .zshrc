@@ -6,6 +6,7 @@ export EDITOR=nvim
 export PATH=/mnt/c/Users/fmiya/AppData/Local/Programs/cursor/resources/app/bin:$PATH
 export RUSTUP_TOOLCHAIN=nightly
 source "$HOME/.cargo/env"
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
 
 # history
 HISTFILE=~/.zsh_history
