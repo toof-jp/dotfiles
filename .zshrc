@@ -60,6 +60,12 @@ function cl() {
   ghq clone $1
 }
 
+# Python HTTP server
+function serve() {
+  local port=${1:-8000}
+  python -m http.server $port
+}
+
 # secret config
 ZSH_SECRET_CONF="${HOME}/.zshrc.secret"
 
@@ -77,7 +83,7 @@ if uname -r | grep -iq 'microsoft'; then
 fi
 
 # start tmux
-[[ -z "$TMUX" && ! -z "$PS1" && "$TERM_PROGRAM" != "vscode" ]] && tmux
+[[ -z "$TMUX" && ! -z "$PS1" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "WarpTerminal" ]] && tmux
 
 PROMPT='%F{yellow}%~%f
 > '
