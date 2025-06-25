@@ -25,12 +25,15 @@ alias cu='cursor .'
 =======
 >>>>>>> dfe62cd (update)
 alias cat='bat'
+
 alias g='git'
 alias ga='git add -A'
 alias gc='git commit -m "update"'
 alias gs='git status'
 alias gp='git push'
 alias gacp='git add -A && git commit -m "update" && git push'
+alias gl='git pull'
+
 alias l='ls --color'
 alias la='ls --color -a'
 alias ll='ls --color -al'
