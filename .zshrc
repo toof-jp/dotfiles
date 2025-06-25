@@ -20,7 +20,6 @@ bindkey -e
 # alias
 alias c='claude'
 alias cdp='c --dangerously-skip-permissions'
-alias cu='cursor .'
 alias cat='bat'
 alias g='git'
 alias ga='git add -A'
