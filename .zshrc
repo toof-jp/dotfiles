@@ -45,6 +45,7 @@ alias -g B="| echo '\a'"
 # start cursor
 function cu() {
   if [ -n "$SSH_CONNECTION" ] || [ -n "$SSH_TTY" ]; then
+    echo "here"
     # We're in an SSH session, use remote cursor
     local ssh_ip=$(echo $SSH_CONNECTION | cut -d' ' -f1)
     local local_ip=$(echo $SSH_CONNECTION | cut -d' ' -f3)
