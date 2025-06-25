@@ -19,8 +19,11 @@ bindkey -e
 
 # alias
 alias c='claude'
+<<<<<<< HEAD
 alias cdp='c --dangerously-skip-permissions'
 alias cu='cursor .'
+=======
+>>>>>>> dfe62cd (update)
 alias cat='bat'
 alias g='git'
 alias ga='git add -A'
@@ -41,6 +44,18 @@ alias -g ....=../../..
 alias -g .....=../../../..
 alias -g L='| less'
 alias -g B="| echo '\a'"
+
+# start cursor
+function cu() {
+  if [ -n "$SSH_CONNECTION" ] || [ -n "$SSH_TTY" ]; then
+    # We're in an SSH session, use remote cursor
+    local ssh_ip=$(echo $SSH_CONNECTION | cut -d' ' -f1)
+    cursor --remote ssh-remote:toof@$ssh_ip "$(pwd)"
+  else
+    # Local session, use regular cursor
+    cursor .
+  fi
+}
 
 # ghq list and cd
 function cg() {
