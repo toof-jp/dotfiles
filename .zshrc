@@ -48,7 +48,7 @@ function cu() {
     # We're in an SSH session, use remote cursor
     local ssh_ip=$(echo $SSH_CONNECTION | cut -d' ' -f1)
     local local_ip=$(echo $SSH_CONNECTION | cut -d' ' -f3)
-    ssh toof@$ssh_ip "cursor ssh-remote:toof@$local_ip \"$(pwd)\""
+    ssh toof@$ssh_ip "/opt/homebrew/bin/cursor ssh-remote:toof@$local_ip \"$(pwd)\""
   else
     # Local session, use regular cursor
     cursor .
