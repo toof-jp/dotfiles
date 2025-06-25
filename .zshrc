@@ -86,7 +86,7 @@ fi
 # start tmux
 [[ -z "$TMUX" && ! -z "$PS1" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "WarpTerminal" ]] && tmux
 
-PROMPT='%F{red}%n@%M%f %F{yellow}%~%f
+PROMPT='%F{red}%n@%m%f %F{yellow}%~%f
 %# '
 
 env=~/.ssh/agent.env
