@@ -47,7 +47,8 @@ function cu() {
   if [ -n "$SSH_CONNECTION" ] || [ -n "$SSH_TTY" ]; then
     # We're in an SSH session, use remote cursor
     local ssh_ip=$(echo $SSH_CONNECTION | cut -d' ' -f1)
-    cursor --remote ssh-remote:toof@$ssh_ip "$(pwd)"
+    local local_ip=$(echo $SSH_CONNECTION | cut -d' ' -f3)
+    ssh toof@$ssh_ip "cursor ssh-remote:toof@$local_ip \"$(pwd)\""
   else
     # Local session, use regular cursor
     cursor .
