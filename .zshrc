@@ -55,7 +55,7 @@ function cu() {
 }
 
 # start code
-function cu() {
+function co() {
   if [ -n "$SSH_CONNECTION" ] || [ -n "$SSH_TTY" ]; then
     # We're in an SSH session, use remote code
     local ssh_ip=$(echo $SSH_CONNECTION | cut -d' ' -f1)
