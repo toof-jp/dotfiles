@@ -54,6 +54,18 @@ function cu() {
   fi
 }
 
+# start code
+function cu() {
+  if [ -n "$SSH_CONNECTION" ] || [ -n "$SSH_TTY" ]; then
+    # We're in an SSH session, use remote code
+    local ssh_ip=$(echo $SSH_CONNECTION | cut -d' ' -f1)
+    ssh toof@$ssh_ip "code --remote ssh-remote+toof@$HOST \"$(pwd)\""
+  else
+    # Local session, use regular code
+    code .
+  fi
+}
+
 # ghq list and cd
 function cg() {
   local selected
