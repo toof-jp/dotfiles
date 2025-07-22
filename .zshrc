@@ -93,6 +93,10 @@ function serve() {
   python -m http.server $port
 }
 
+function demosh() {
+  PROMPT="$ "
+}
+
 # secret config
 ZSH_SECRET_CONF="${HOME}/.zshrc.secret"
 
