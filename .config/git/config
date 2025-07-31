@@ -2,11 +2,20 @@
   defaultBranch = main
 
 [user]
-  name = toof
+  name = Fumiya Tokumasu
   email = toof@toof.jp
+	signingkey = 1D55316F12B1EF61
+
+[commit]
+  gpgsign = true
+
+[tag]
+  gpgsign = true
 
 [alias]
   pull = pull --all
 
 [diff]
   external = difft
+[gpg]
+	program = gpg

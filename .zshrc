@@ -140,3 +140,8 @@ elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
 fi
 
 unset env
+
+# GPG
+export GPG_TTY=$(tty)
+gpgconf --launch gpg-agent
+export GPG_TTY=$(tty)
