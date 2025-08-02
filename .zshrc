@@ -145,3 +145,11 @@ unset env
 export GPG_TTY=$(tty)
 gpgconf --launch gpg-agent
 export GPG_TTY=$(tty)
+
+# kubectl
+autoload -Uz compinit
+compinit
+source <(kubectl completion zsh)
+
+# krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
