@@ -33,6 +33,7 @@ alias l='ls --color'
 alias la='ls --color -a'
 alias ll='ls --color -al'
 alias v='nvim'
+alias kc='kubectl'
 alias toof='cd ~/ghq/github.com/toof-jp'
 ## new repo
 alias nr='cd ~/ghq/github.com/toof-jp && gh repo create' 
