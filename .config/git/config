@@ -4,7 +4,7 @@
 [user]
   name = Fumiya Tokumasu
   email = toof@toof.jp
-	signingkey = 1D55316F12B1EF61
+  signingkey = 1D55316F12B1EF61
 
 [commit]
   gpgsign = true
@@ -17,5 +17,6 @@
 
 [diff]
   external = difft
+
 [gpg]
-	program = gpg
+ program = gpg
