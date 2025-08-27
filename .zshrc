@@ -38,6 +38,7 @@ alias toof='cd ~/ghq/github.com/toof-jp'
 ## new repo
 alias nr='cd ~/ghq/github.com/toof-jp && gh repo create' 
 alias vps='ssh $(cat ~/vps-user-and-fqdn)'
+alias tree='tree --gitignore'
 alias -g ...=../..
 alias -g ....=../../..
 alias -g .....=../../../..
@@ -117,7 +118,15 @@ fi
 # start tmux
 [[ -z "$TMUX" && ! -z "$PS1" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "WarpTerminal" ]] && tmux
 
-PROMPT='%F{red}%n@%m%f %F{yellow}%~%f
+# prompt
+source ~/.zsh/git-prompt.sh
+
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUPSTREAM=auto
+
+setopt PROMPT_SUBST ; PROMPT='%F{red}%n@%m%f %F{green}$(__git_ps1 "(%s)")%f %F{yellow}%~%f
 %# '
 
 env=~/.ssh/agent.env
