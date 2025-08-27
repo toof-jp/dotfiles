@@ -6,17 +6,20 @@
   email = toof@toof.jp
   signingkey = 1D55316F12B1EF61
 
-[commit]
-  gpgsign = true
-
-[tag]
-  gpgsign = true
+[push]
+    autoSetupRemote = true
 
 [alias]
   pull = pull --all
 
 [diff]
   external = difft
+
+[commit]
+  gpgsign = true
+
+[tag]
+  gpgsign = true
 
 [gpg]
  program = gpg
