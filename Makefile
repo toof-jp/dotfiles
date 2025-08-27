@@ -1,8 +1,8 @@
 all: zsh git tmux ssh neovim cargo rustfmt claude krew
 
 zsh:
-	mkdir -p ~/.zsh
-	curl -o ~/.zsh/git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+	mkdir -p ${HOME}/.zsh
+	curl -o ${HOME}/.zsh/git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 	ln -sf ${PWD}/.zshrc ${HOME}/.zshrc
 	ln -sf ${PWD}/.zshrc.secret ${HOME}/.zshrc.secret
 
