@@ -128,6 +128,7 @@ GIT_PS1_SHOWUPSTREAM=auto
 
 setopt PROMPT_SUBST ; PROMPT='%F{red}%n@%m%f %F{green}$(__git_ps1 "(%s)")%f %F{yellow}%~%f
 %# '
+RPROMPT='%F{cyan}%D{%Y-%m-%d} %*%f'
 
 env=~/.ssh/agent.env
 
