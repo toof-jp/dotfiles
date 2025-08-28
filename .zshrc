@@ -17,6 +17,9 @@ SAVEHIST=10000
 bindkey -d
 bindkey -e
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
 # alias
 alias c='claude'
 alias cdp='c --dangerously-skip-permissions'
