@@ -1,17 +1,17 @@
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
-export PATH=$HOME/.cargo/bin:$PATH
 export EDITOR=nvim
-# cursor path
-export PATH=/mnt/c/Users/fmiya/AppData/Local/Programs/cursor/resources/app/bin:$PATH
 export RUSTUP_TOOLCHAIN=nightly
-source "$HOME/.cargo/env"
-export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
-
 # history
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+export HISTFILE=~/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+
+# PATH
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=/mnt/c/Users/fmiya/AppData/Local/Programs/cursor/resources/app/bin:$PATH
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # keybind
 bindkey -d
@@ -99,6 +99,7 @@ function serve() {
   python -m http.server $port
 }
 
+# set prompt for copy and paste
 function demosh() {
   PROMPT="$ "
 }
@@ -165,6 +166,3 @@ export GPG_TTY=$(tty)
 autoload -Uz compinit
 compinit
 source <(kubectl completion zsh)
-
-# krew
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
