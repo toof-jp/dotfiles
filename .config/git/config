@@ -7,7 +7,7 @@
   signingkey = 1D55316F12B1EF61
 
 [push]
-    autoSetupRemote = true
+  autoSetupRemote = true
 
 [alias]
   pull = pull --all
@@ -22,4 +22,4 @@
   gpgsign = true
 
 [gpg]
- program = gpg
+  program = gpg
