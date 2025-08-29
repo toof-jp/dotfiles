@@ -166,3 +166,5 @@ export GPG_TTY=$(tty)
 autoload -Uz compinit
 compinit
 source <(kubectl completion zsh)
+
+eval "$(mise activate zsh)"
