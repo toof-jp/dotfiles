@@ -14,3 +14,9 @@ git clone https://github.com/toof-jp/dotfiles.git
 cd dotfiles
 make
 ```
+
+If you want to enable the optional GPG configuration, run the command below.
+
+```
+make gpg
+```
