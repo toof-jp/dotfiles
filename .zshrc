@@ -118,7 +118,6 @@ fi
 # start tmux
 [[ -z "$TMUX" && ! -z "$PS1" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "WarpTerminal" ]] && tmux
 
-
 # prompt
 source ~/.zsh/git-prompt.sh
 
