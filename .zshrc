@@ -99,11 +99,6 @@ function serve() {
   python -m http.server $port
 }
 
-# set prompt for copy and paste
-function demosh() {
-  PROMPT="$ "
-}
-
 # secret config
 ZSH_SECRET_CONF="${HOME}/.zshrc.secret"
 
@@ -134,6 +129,14 @@ GIT_PS1_SHOWUPSTREAM=auto
 setopt PROMPT_SUBST ; PROMPT='%F{red}%n@%m%f %F{green}$(__git_ps1 "(%s)")%f %F{yellow}%~%f
 %# '
 RPROMPT='%F{cyan}%D{%Y-%m-%d} %*%f'
+
+if [[ $DEMOSH -eq 1 ]] then
+  PROMPT='$ '
+  RPROMPT=''
+fi
+
+# start shell for copy and paste
+alias demosh='DEMOSH=1 zsh'
 
 env=~/.ssh/agent.env
 
