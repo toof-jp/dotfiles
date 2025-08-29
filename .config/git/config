@@ -7,7 +7,7 @@
   signingkey = 1D55316F12B1EF61
 
 [push]
-    autoSetupRemote = true
+  autoSetupRemote = true
 
 [alias]
   pull = pull --all
@@ -15,11 +15,5 @@
 [diff]
   external = difft
 
-[commit]
-  gpgsign = true
-
-[tag]
-  gpgsign = true
-
-[gpg]
- program = gpg
+[include]
+  path = ~/.config/git/gpg.config

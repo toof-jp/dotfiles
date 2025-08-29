@@ -7,8 +7,13 @@ zsh:
 	ln -sf ${PWD}/.zshrc.secret ${HOME}/.zshrc.secret
 
 git:
-	mkdir -p ${HOME}/.config
-	ln -sf ${PWD}/.config/git ${HOME}/.config
+	mkdir -p ${HOME}/.config/git
+	ln -sf ${PWD}/.config/git/config ${HOME}/.config/git/config
+	ln -sf ${PWD}/.config/git/ignore ${HOME}/.config/git/ignore
+
+# optional
+gpg: git
+	ln -sf ${PWD}/.config/git/gpg.config ${HOME}/.config/git/gpg.config
 
 tmux:
 	mkdir -p ${HOME}/.config
