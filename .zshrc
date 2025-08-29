@@ -126,17 +126,22 @@ GIT_PS1_SHOWUNTRACKEDFILES=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUPSTREAM=auto
 
-setopt PROMPT_SUBST ; PROMPT='%F{red}%n@%m%f %F{green}$(__git_ps1 "(%s)")%f %F{yellow}%~%f
+DEMOSH_TOGGLE=0
+# toggle prompt to copy shell
+function demosh() {
+  if [[ $DEMOSH_TOGGLE -eq 0 ]] then
+    setopt PROMPT_SUBST ; PROMPT='%F{red}%n@%m%f %F{green}$(__git_ps1 "(%s)")%f %F{yellow}%~%f
 %# '
-RPROMPT='%F{cyan}%D{%Y-%m-%d} %*%f'
+    RPROMPT='%F{cyan}%D{%Y-%m-%d} %*%f'
+  else
+    PROMPT='$ '
+    RPROMPT=''
+  fi
 
-if [[ $DEMOSH -eq 1 ]] then
-  PROMPT='$ '
-  RPROMPT=''
-fi
+  (( DEMOSH_TOGGLE ^= 1 ))
+}
 
-# start shell for copy and paste
-alias demosh='DEMOSH=1 zsh'
+demosh
 
 env=~/.ssh/agent.env
 
