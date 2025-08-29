@@ -119,12 +119,6 @@ fi
 [[ -z "$TMUX" && ! -z "$PS1" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "WarpTerminal" ]] && tmux
 
 
-# set prompt for copy and paste
-function demosh() {
-  PROMPT='$ '
-  RPROMPT=''
-}
-
 # prompt
 source ~/.zsh/git-prompt.sh
 
@@ -133,13 +127,22 @@ GIT_PS1_SHOWUNTRACKEDFILES=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUPSTREAM=auto
 
-function undemosh() {
-  setopt PROMPT_SUBST ; PROMPT='%F{red}%n@%m%f %F{green}$(__git_ps1 "(%s)")%f %F{yellow}%~%f
+DEMOSH_TOGGLE=0
+# toggle prompt to copy shell
+function demosh() {
+  if [[ $DEMOSH_TOGGLE -eq 0 ]] then
+    setopt PROMPT_SUBST ; PROMPT='%F{red}%n@%m%f %F{green}$(__git_ps1 "(%s)")%f %F{yellow}%~%f
 %# '
-  RPROMPT='%F{cyan}%D{%Y-%m-%d} %*%f'
+    RPROMPT='%F{cyan}%D{%Y-%m-%d} %*%f'
+  else
+    PROMPT='$ '
+    RPROMPT=''
+  fi
+
+  (( DEMOSH_TOGGLE ^= 1 ))
 }
 
-undemosh
+demosh
 
 env=~/.ssh/agent.env
 
