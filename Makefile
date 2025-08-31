@@ -2,14 +2,16 @@ all: zsh git tmux ssh neovim cargo rustfmt claude krew
 
 zsh:
 	mkdir -p ${HOME}/.zsh
+	mkdir -p ${HOME}/.config
 	curl -o ${HOME}/.zsh/git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 	ln -sf ${PWD}/.zshrc ${HOME}/.zshrc
 	ln -sf ${PWD}/.zshrc.secret ${HOME}/.zshrc.secret
+	ln -sf ${PWD}/.config/starship.toml ${HOME}/.config
 
 git:
 	mkdir -p ${HOME}/.config/git
-	ln -sf ${PWD}/.config/git/config ${HOME}/.config/git/config
-	ln -sf ${PWD}/.config/git/ignore ${HOME}/.config/git/ignore
+	ln -sf ${PWD}/.config/git/config ${HOME}/.config/git
+	ln -sf ${PWD}/.config/git/ignore ${HOME}/.config/git
 
 # optional
 gpg: git
