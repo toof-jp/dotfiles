@@ -55,6 +55,8 @@ set conceallevel=0
 inoremap <C-f> <esc>
 tnoremap <silent> <esc> <C-\><C-n>
 
+command! Q q!
+
 autocmd ColorScheme * hi LineNr guibg=#2a2e34 guifg=#aebbc5
 autocmd ColorScheme * hi CursorLineNr guibg=#658494 guifg=#2a2e34
 set background=dark
