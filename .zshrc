@@ -137,7 +137,7 @@ function demosh() {
   if [[ $DEMOSH_TOGGLE -eq 0 ]] then
     eval "$(starship init zsh)"
   else
-    PROMPT='$ '
+    PROMPT='%F{cyan}$%f '
     RPROMPT=''
   fi
 
