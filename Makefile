@@ -24,6 +24,7 @@ tmux:
 ssh:
 	mkdir -p ${HOME}/.ssh
 	ln -sf ${PWD}/.ssh/config ${HOME}/.ssh
+	ln -sf ${PWD}/.ssh/config.mac ${HOME}/.ssh
 
 neovim:
 	mkdir -p ${HOME}/.config
@@ -44,5 +45,9 @@ claude:
 
 krew:
 	sh krew.sh
+
+mac:
+	mkdir -p ${HOME}/.ssh
+	ln -sf ${PWD}/.ssh/config.mac ${HOME}/.ssh
 
 .PHONY: all zsh git tmux ssh neovim cargo rustfmt claude krew
