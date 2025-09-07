@@ -45,6 +45,7 @@ alias l='ls --color'
 alias la='ls --color -a'
 alias ll='ls --color -al'
 alias v='nvim'
+alias rm='gomi'
 alias kc='kubectl'
 alias toof='cd ~/ghq/github.com/toof-jp'
 ## new repo
