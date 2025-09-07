@@ -20,8 +20,10 @@ style_user = "red"
 format = '[$user]($style)'
 
 [hostname]
+ssh_only = false
+ssh_symbol = "SSH"
 style = "red"
-format = '[$hostname]($style)'
+format = '[$hostname]($style) in [$ssh_symbol](green)'
 
 [git_branch]
 symbol = ""
