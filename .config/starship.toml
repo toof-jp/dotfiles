@@ -24,7 +24,7 @@ show_always = true
 ssh_only = false
 ssh_symbol = "SSH"
 style = "red"
-format = '[$hostname]($style) in [$ssh_symbol](green)'
+format = '[$hostname]($style) [$ssh_symbol](green)'
 
 [git_branch]
 symbol = ""
