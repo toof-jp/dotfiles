@@ -18,6 +18,7 @@ symbol = ' '
 style_root = "red"
 style_user = "red"
 format = '[$user]($style)'
+show_always = true
 
 [hostname]
 ssh_only = false
