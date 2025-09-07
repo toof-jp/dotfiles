@@ -28,7 +28,9 @@ alias ca='cargo'
 alias cat='bat'
 alias g='git'
 alias ga='git add -A'
-alias gc='git commit'
+function gc() {
+  git commit -m "$*"
+}
 alias gu='git commit -m "update"'
 alias s='git status'
 alias gs='git switch'
