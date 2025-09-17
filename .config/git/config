@@ -1,3 +1,5 @@
+[core]
+  quotepath = false
 [init]
   defaultBranch = main
 
