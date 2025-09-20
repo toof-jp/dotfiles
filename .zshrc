@@ -94,6 +94,11 @@ function cg() {
   [ -n "$selected" ] && cd "$(ghq root)/$selected"
 }
 
+function repo() {
+  local root_path=$(git rev-parse --show-toplevel)
+  [ -n "$root_path" ] && cd $root_path
+}
+
 # ghq clone
 function cl() {
   if [ "$#" -eq 0 ]; then
