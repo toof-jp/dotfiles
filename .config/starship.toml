@@ -4,6 +4,7 @@ add_newline = false
 
 format = """
 $username@$hostname $directory$git_branch $git_commit$git_state$git_status$fill$time
+$kubernetes
 $character
 """
 
@@ -41,3 +42,9 @@ format = "[$time]($style)"
 time_format = "%Y-%m-%d %H:%M:%S%z"
 style = "cyan"
 disabled = false
+
+[kubernetes]
+format = '[$cluster $context]($style)'
+disabled = false
+style = "purple"
+
