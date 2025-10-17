@@ -54,6 +54,7 @@ alias nr='cd ~/ghq/github.com/toof-jp && gh repo create'
 alias vps='ssh $(cat ~/vps-user-and-fqdn)'
 alias tree='tree --gitignore'
 alias capture-pane='tmux capture-pane -pS -'
+alias card='gpg --card-status'
 alias -g ...=../..
 alias -g ....=../../..
 alias -g .....=../../../..
