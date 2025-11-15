@@ -1,4 +1,4 @@
-all: zsh git tmux ssh neovim cargo rustfmt claude krew
+all: zsh git tmux ssh neovim cargo rustfmt claude codex krew
 
 zsh:
 	mkdir -p ${HOME}/.zsh
@@ -43,6 +43,10 @@ claude:
 	mkdir -p ${HOME}/.config/claude
 	ln -sf ${PWD}/.config/claude/settings.json ${HOME}/.config/claude
 
+codex:
+	mkdir -p ${HOME}/.codex
+	ln -sf ${PWD}/.codex/config.toml ${HOME}/.codex
+
 krew:
 	sh krew.sh
 
@@ -50,4 +54,4 @@ mac:
 	mkdir -p ${HOME}/.ssh
 	ln -sf ${PWD}/.ssh/config.mac ${HOME}/.ssh
 
-.PHONY: all zsh git tmux ssh neovim cargo rustfmt claude krew
+.PHONY: all zsh git tmux ssh neovim cargo rustfmt claude codex krew
