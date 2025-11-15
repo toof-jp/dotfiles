@@ -55,6 +55,9 @@ set conceallevel=0
 inoremap <C-f> <esc>
 tnoremap <silent> <esc> <C-\><C-n>
 
+" replace selection with last yanked text without overwriting the yank register
+xnoremap p "_dP
+
 command! Q q!
 
 autocmd ColorScheme * hi LineNr guibg=#2a2e34 guifg=#aebbc5
