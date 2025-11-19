@@ -36,7 +36,7 @@ alias s='git status'
 alias gs='git switch'
 alias GS='git stash'
 alias gp='git push'
-alias gpf='git push --force-with-lease'
+alias gpforce='git push --force-with-lease'
 alias gr='git restore'
 alias grs='git reset --soft HEAD^'
 alias gacp='git add -A && git commit -m "update" && git push'
@@ -51,13 +51,15 @@ alias v='nvim'
 alias rm='gomi'
 alias kc='kubectl'
 alias toof='cd ~/ghq/github.com/toof-jp'
-## new repo
-alias nr='cd ~/ghq/github.com/toof-jp && gh repo create' 
+alias nr='cd ~/ghq/github.com/toof-jp && gh repo create' # new repo
 alias vps='ssh $(cat ~/vps-user-and-fqdn)'
 alias tree='tree --gitignore'
 alias capture-pane='tmux capture-pane -pS -'
 alias card='gpg --card-status'
 alias port='ss -tulpn'
+alias op='OP_SERVICE_ACCOUNT_TOKEN=$(gcloud secrets versions access latest --secret=1password-cli-service-account --project toof-infra) op'
+alias recard='gpgconf --kill scdaemon && gpgconf --kill gpg-agent' # restart gpg
+alias src='source ~/.zshrc'
 alias -g ...=../..
 alias -g ....=../../..
 alias -g .....=../../../..
