@@ -60,6 +60,8 @@ alias port='ss -tulpn'
 alias op='OP_SERVICE_ACCOUNT_TOKEN=$(gcloud secrets versions access latest --secret=1password-cli-service-account --project toof-infra) op'
 alias recard='gpgconf --kill scdaemon && gpgconf --kill gpg-agent' # restart gpg
 alias src='source ~/.zshrc'
+alias cx='codex'
+alias 9='k9s'
 alias -g ...=../..
 alias -g ....=../../..
 alias -g .....=../../../..
