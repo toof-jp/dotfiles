@@ -57,7 +57,6 @@ alias tree='tree --gitignore'
 alias capture-pane='tmux capture-pane -pS -'
 alias card='gpg --card-status'
 alias port='ss -tulpn'
-alias op='OP_SERVICE_ACCOUNT_TOKEN=$(gcloud secrets versions access latest --secret=1password-cli-service-account --project toof-infra) op'
 alias recard='gpgconf --kill scdaemon && gpgconf --kill gpg-agent' # restart gpg
 alias src='source ~/.zshrc'
 alias cx='codex'
