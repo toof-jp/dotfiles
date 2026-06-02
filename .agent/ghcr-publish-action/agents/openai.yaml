@@ -1,0 +1,3 @@
+interface:
+  display_name: "GHCR Publish Action"
+  short_description: "Write GHCR push workflows with root/nested Dockerfile detection"

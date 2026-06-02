@@ -198,3 +198,6 @@ compinit
 source <(kubectl completion zsh)
 
 eval "$(mise activate zsh)"
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
