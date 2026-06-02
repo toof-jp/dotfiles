@@ -19,3 +19,5 @@
 
 [include]
   path = ~/.config/git/gpg.config
+[commit]
+	gpgsign = true
