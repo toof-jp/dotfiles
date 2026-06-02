@@ -201,3 +201,6 @@ eval "$(mise activate zsh)"
 
 # Vite+ bin (https://viteplus.dev)
 . "$HOME/.vite-plus/env"
+
+# Added by Antigravity
+export PATH="/Users/toof/.antigravity/antigravity/bin:$PATH"
