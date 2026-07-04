@@ -3,3 +3,10 @@ prefix = "ctrl+space"
 new_workspace = "prefix+c"
 split_vertical = "prefix+%"
 split_horizontal = "prefix+\""
+navigate_workspace_up = "ctrl+k"
+navigate_workspace_down = "ctrl+j"
+previous_agent = "prefix+,"
+next_agent = "prefix+."
+
+[ui]
+agent_panel_sort = "priority"
