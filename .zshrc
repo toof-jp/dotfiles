@@ -140,8 +140,8 @@ if uname -r | grep -iq 'microsoft'; then
   alias pbpaste='win32yank.exe -o --lf'
 fi
 
-# start tmux
-[[ -z "$TMUX" && ! -z "$PS1" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "WarpTerminal" ]] && tmux
+# start herdr
+[[ -z "$HERDR_PANE_ID" && ! -z "$PS1" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "WarpTerminal" ]] && herdr
 
 # prompt
 source ~/.zsh/git-prompt.sh
