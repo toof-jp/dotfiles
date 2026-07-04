@@ -1,0 +1,6 @@
+[keys]
+prefix = "ctrl+space"
+
+# Match tmux: prefix+" stacks panes top/bottom, prefix+% splits panes side by side
+split_vertical = "prefix+%"
+split_horizontal = "prefix+\""
