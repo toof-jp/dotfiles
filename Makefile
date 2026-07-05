@@ -43,6 +43,7 @@ claude:
 	mkdir -p ${HOME}/.config
 	mkdir -p ${HOME}/.config/claude
 	ln -sf ${PWD}/.config/claude/settings.json ${HOME}/.config/claude
+	ln -sf ${PWD}/.config/claude/CLAUDE.md ${HOME}/.config/claude
 
 codex:
 	mkdir -p ${HOME}/.codex
