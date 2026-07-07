@@ -10,3 +10,4 @@ next_agent = "prefix+."
 
 [ui]
 agent_panel_sort = "priority"
+mobile_width_threshold = 66
