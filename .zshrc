@@ -190,8 +190,7 @@ unset env
 
 # GPG
 export GPG_TTY=$(tty)
-gpgconf --launch gpg-agent
-export GPG_TTY=$(tty)
+[[ -z "$SSH_CONNECTION" ]] && gpgconf --launch gpg-agent
 
 # kubectl
 autoload -Uz compinit
