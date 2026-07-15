@@ -34,6 +34,13 @@ function gc() {
 alias gu='git commit -m "update"'
 alias s='git status'
 alias gs='git switch'
+function gm() {
+  if git show-ref --verify --quiet refs/heads/main; then
+    git switch main
+  else
+    git switch master
+  fi
+}
 alias GS='git stash'
 alias gp='git push'
 alias gpforce='git push --force-with-lease'
@@ -204,3 +211,10 @@ eval "$(mise activate zsh)"
 
 # Added by Antigravity
 export PATH="/Users/toof/.antigravity/antigravity/bin:$PATH"
+
+# bun completions
+[ -s "/Users/fumiya_tokumasu/.bun/_bun" ] && source "/Users/fumiya_tokumasu/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
