@@ -15,3 +15,6 @@ mobile_width_threshold = 66
 
 [ui.toast.clipboard]
 enabled = false
+
+[experimental]
+pane_history = true

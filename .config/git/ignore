@@ -5,4 +5,4 @@
 .local_docs/
 .DS_Store
 compile_commands.json
-**/.claude/settings.local.json
+**/.claude/
