@@ -17,6 +17,10 @@ git:
 gpg: git
 	ln -sf ${PWD}/.config/git/gpg.config ${HOME}/.config/git/gpg.config
 
+gnupg:
+	mkdir -p ${HOME}/.gnupg
+	ln -sf ${PWD}/.config/gnupg/gpg-agent.conf ${HOME}/.gnupg
+
 tmux:
 	mkdir -p ${HOME}/.config
 	ln -sf ${PWD}/.config/tmux ${HOME}/.config
@@ -60,4 +64,4 @@ mac:
 	mkdir -p ${HOME}/.ssh
 	ln -sf ${PWD}/.ssh/config.mac ${HOME}/.ssh
 
-.PHONY: all zsh git tmux ssh neovim cargo rustfmt claude codex krew herdr
+.PHONY: all zsh git tmux ssh neovim cargo rustfmt claude codex krew herdr gpg gnupg
