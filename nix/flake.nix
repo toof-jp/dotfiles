@@ -71,14 +71,17 @@
 
       # Minimal qcow2 for KubeVirt:
       #   nix build .#kubevirt-image
-      # 64 GiB virtual size (sparse), leaving room for the full config +
-      # dev work after the in-VM rebuild.
+      # Sized to the closure: large virtual sizes make cptofs OOM/thrash
+      # inside its 100MB LKL kernel. CDI expands the disk to the PVC size on
+      # import, and growPartition/autoResize (from the kubevirt module) grow
+      # the root fs on first boot.
       packages.x86_64-linux.kubevirt-image =
         import (nixpkgs + "/nixos/lib/make-disk-image.nix") {
           inherit (self.nixosConfigurations.kubevirt-base) config pkgs;
           lib = nixpkgs.lib;
           format = "qcow2";
-          diskSize = 65536; # MiB
+          diskSize = "auto";
+          additionalSpace = "2048M"; # slack until the first-boot resize
         };
 
       homeConfigurations = {
