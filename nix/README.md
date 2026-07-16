@@ -46,6 +46,26 @@ nix flake update         # update all inputs in flake.lock
 nix flake update herdr   # update a single input
 ```
 
+### Dev VM on KubeVirt (zen2)
+
+The VM boots a minimal image (`.#kubevirt-image`, built from
+`nixosConfigurations.kubevirt-base`) that CDI imports from
+`gs://toof-infra-vm-images/nixos-dev.qcow2`; manifests live in
+toof-jp/infra `kubernetes/applications/dev-vm`. Apply the full dev config
+from inside the VM:
+
+```sh
+sudo nixos-rebuild switch --flake 'github:toof-jp/dotfiles?dir=nix#kubevirt'
+```
+
+To ship a new image:
+
+```sh
+nix build ./nix#kubevirt-image
+gcloud storage cp result/nixos.qcow2 gs://toof-infra-vm-images/nixos-dev.qcow2
+# then delete the dev-root DataVolume in the cluster to re-import
+```
+
 ## Notes
 
 - `claude-code` has an unfree license, so `allowUnfree = true` is set.

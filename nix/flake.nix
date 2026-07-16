@@ -54,22 +54,34 @@
           modules = [ ./hosts/dev/configuration.nix ] ++ homeManagerModules;
         };
 
-        # Dev VM on KubeVirt (zen2)
+        # Dev VM on KubeVirt (zen2): full config, applied from inside the
+        # VM with nixos-rebuild (the shipped image only contains kubevirt-base)
         kubevirt = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./hosts/kubevirt/configuration.nix ] ++ homeManagerModules;
         };
+
+        # What actually gets baked into the qcow2: boot + SSH only, so the
+        # slow cptofs step in the image build stays small
+        kubevirt-base = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/kubevirt/base.nix ];
+        };
       };
 
-      # qcow2 for the KubeVirt containerDisk:
+      # Minimal qcow2 for KubeVirt:
       #   nix build .#kubevirt-image
-      # 64 GiB virtual size (sparse, so the file only stores written data).
+      # Sized to the closure: large virtual sizes make cptofs OOM/thrash
+      # inside its 100MB LKL kernel. CDI expands the disk to the PVC size on
+      # import, and growPartition/autoResize (from the kubevirt module) grow
+      # the root fs on first boot.
       packages.x86_64-linux.kubevirt-image =
         import (nixpkgs + "/nixos/lib/make-disk-image.nix") {
-          inherit (self.nixosConfigurations.kubevirt) config pkgs;
+          inherit (self.nixosConfigurations.kubevirt-base) config pkgs;
           lib = nixpkgs.lib;
           format = "qcow2";
-          diskSize = 65536; # MiB
+          diskSize = "auto";
+          additionalSpace = "2048M"; # slack until the first-boot resize
         };
 
       homeConfigurations = {
