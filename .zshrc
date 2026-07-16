@@ -208,10 +208,16 @@ autoload -Uz compinit
 compinit
 source <(kubectl completion zsh)
 
+# git-gtr (git-worktree-runner) shell integration
+# adds `gtr cd` (fzf picker over worktrees) and `gtr new --cd`
+_gtr_init="${XDG_CACHE_HOME:-$HOME/.cache}/gtr/init-gtr.zsh"
+[[ -f "$_gtr_init" ]] || eval "$(git gtr init zsh)" || true
+source "$_gtr_init" 2>/dev/null || true; unset _gtr_init
+
 eval "$(mise activate zsh)"
 
 # Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
+[ -f "$HOME/.vite-plus/env" ] && . "$HOME/.vite-plus/env"
 
 # bun completions
 [ -s "/Users/fumiya_tokumasu/.bun/_bun" ] && source "/Users/fumiya_tokumasu/.bun/_bun"
