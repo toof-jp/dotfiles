@@ -5,6 +5,19 @@
 {
   imports = [ ./base.nix ];
 
+  # Lets plain `sudo nixos-rebuild switch` work inside the VM (nixos-rebuild
+  # picks up /etc/nixos/flake.nix and the attr matching the hostname).
+  # Use `--refresh` to force-fetch the latest dotfiles; the github tarball
+  # is otherwise cached for a while.
+  environment.etc."nixos/flake.nix".text = ''
+    {
+      inputs.dotfiles.url = "github:toof-jp/dotfiles?dir=nix";
+      outputs = { dotfiles, ... }: {
+        nixosConfigurations.dev-vm = dotfiles.nixosConfigurations.kubevirt;
+      };
+    }
+  '';
+
   nixpkgs.config.allowUnfree = true;
 
   nix.gc = {
