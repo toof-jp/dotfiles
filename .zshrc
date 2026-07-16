@@ -13,6 +13,10 @@ export PATH=$HOME/.cargo/bin:$PATH
 export PATH=/mnt/c/Users/fmiya/AppData/Local/Programs/cursor/resources/app/bin:$PATH
 export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="/Users/toof/.antigravity/antigravity/bin:$PATH"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$PATH:/opt/homebrew/share/google-cloud-sdk/bin"
 
 # keybind
 bindkey -d
@@ -209,12 +213,5 @@ eval "$(mise activate zsh)"
 # Vite+ bin (https://viteplus.dev)
 . "$HOME/.vite-plus/env"
 
-# Added by Antigravity
-export PATH="/Users/toof/.antigravity/antigravity/bin:$PATH"
-
 # bun completions
 [ -s "/Users/fumiya_tokumasu/.bun/_bun" ] && source "/Users/fumiya_tokumasu/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"

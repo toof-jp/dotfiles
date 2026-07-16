@@ -21,3 +21,5 @@
   path = ~/.config/git/gpg.config
 [commit]
 	gpgsign = true
+[gtr "worktrees"]
+	dir = .worktrees
