@@ -1,6 +1,6 @@
 # Commit policy
 
-The user always commits with a GPG-signed key themselves. Claude Code must never run `git commit` (staging, diffing, and other git commands are fine). Prepare the change and let the user commit it.
+All commits must be GPG-signed. Never commit with signing disabled (e.g. `--no-gpg-sign` or `commit.gpgsign=false`) — if signing fails, stop and report the error instead of working around it.
 
 # PR comment policy
 
