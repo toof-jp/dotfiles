@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Upstream pins nixos-unstable + rust-overlay toolchain; intentionally
     # not following our nixpkgs so it builds exactly as upstream CI tests it.
     herdr.url = "github:ogulcancelik/herdr";
