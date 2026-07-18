@@ -18,6 +18,11 @@
 
   home.file.".zshrc".source = ./zshrc;
 
+  # .zshrc sources ~/.zsh/git-prompt.sh; the Makefile curls it from git
+  # upstream, but on nix-managed machines ship the one bundled with git.
+  home.file.".zsh/git-prompt.sh".source =
+    "${pkgs.git}/share/git/contrib/completion/git-prompt.sh";
+
   home.packages = with pkgs; [
     # shell
     zsh

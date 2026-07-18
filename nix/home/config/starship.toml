@@ -3,10 +3,18 @@
 add_newline = false
 
 format = """
-$username@$hostname $kubernetes $git_branch $git_commit$git_state$git_status$fill$time
+${custom.vm}$username@$hostname $kubernetes $git_branch $git_commit$git_state$git_status$fill$time
 $directory
 $character
 """
+
+# Show a bright "VM" badge when running inside a virtual machine
+# (systemd-detect-virt --vm: kvm on the kubevirt VM, none on bare metal;
+# not present on macOS, so the module is simply skipped there).
+[custom.vm]
+when = "systemd-detect-virt --vm -q"
+style = "bold fg:black bg:yellow"
+format = '[ VM ]($style) '
 
 [character]
 success_symbol = '[\$](bold green)'
