@@ -5,6 +5,8 @@
 { pkgs, lib, inputs, ... }:
 
 {
+  imports = [ ./configs.nix ];
+
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;

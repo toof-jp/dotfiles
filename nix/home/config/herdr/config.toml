@@ -1,0 +1,20 @@
+onboarding = false
+[keys]
+prefix = "ctrl+space"
+new_workspace = "prefix+c"
+split_vertical = "prefix+%"
+split_horizontal = "prefix+\""
+previous_workspace = "prefix+k"
+next_workspace = "prefix+j"
+previous_agent = "prefix+,"
+next_agent = "prefix+."
+
+[ui]
+agent_panel_sort = "priority"
+mobile_width_threshold = 66
+
+[ui.toast.clipboard]
+enabled = false
+
+[experimental]
+pane_history = true
