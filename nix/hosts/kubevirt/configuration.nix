@@ -28,6 +28,9 @@
 
   users.users.toof.extraGroups = [ "docker" ];
 
+  # First time: sudo tailscale up
+  services.tailscale.enable = true;
+
   virtualisation.docker = {
     enable = true;
     # default docker 28.x is marked insecure in nixos-25.11

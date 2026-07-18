@@ -44,6 +44,9 @@
   services.pcscd.enable = true;
   programs.gnupg.agent.enable = true;
 
+  # First time: sudo tailscale up
+  services.tailscale.enable = true;
+
   environment.systemPackages = with pkgs; [
     vim
     git

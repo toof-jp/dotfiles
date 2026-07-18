@@ -21,7 +21,9 @@
     # git
     git
     gh
+    gh-dash # wired as a gh extension below; alias dash='gh dash'
     ghq
+    (callPackage ./git-gtr.nix { }) # git gtr — worktree runner
     difftastic # git diff.external = difft
 
     # editor / terminal
@@ -53,4 +55,9 @@
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     pinentry_mac
   ];
+
+  # gh looks for extensions in ~/.local/share/gh/extensions, not on PATH;
+  # wire gh-dash there so `gh dash` works without `gh extension install`.
+  home.file.".local/share/gh/extensions/gh-dash/gh-dash".source =
+    "${pkgs.gh-dash}/bin/gh-dash";
 }
