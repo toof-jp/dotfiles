@@ -6,6 +6,8 @@
 { pkgs, lib, inputs, ... }:
 
 {
+  imports = [ ./nixvim.nix ];
+
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
@@ -30,7 +32,11 @@
     difftastic # git diff.external = difft
 
     # editor / terminal
-    neovim # .config/nvim, .config/lua-nvim
+    # Plain neovim stays for the NVIM_APPNAME-based configs (.config/nvim /
+    # .config/lua-nvim, aliases ov / v). nixvim (see ./nixvim.nix) also ships
+    # a bin/nvim; hiPrio lets this one win the `nvim` name, the nixvim build
+    # is available as `nixvim`.
+    (lib.hiPrio neovim)
     tmux # .config/tmux
 
     # kubernetes
