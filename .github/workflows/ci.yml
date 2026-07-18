@@ -18,7 +18,7 @@ jobs:
   flake-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
       - run: nix flake check ./nix --all-systems
 
@@ -32,7 +32,7 @@ jobs:
           - nixosConfigurations.kubevirt.config.system.build.toplevel
           - homeConfigurations."toof@linux".activationPackage
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       # Full NixOS closures need more than the ~14GB free on a stock runner
       - name: Free disk space
@@ -49,7 +49,7 @@ jobs:
   build-mac:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
       - name: Build homeConfigurations."toof@mac".activationPackage
         run: nix build './nix#homeConfigurations."toof@mac".activationPackage' --no-link --print-build-logs
