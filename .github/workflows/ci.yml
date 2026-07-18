@@ -14,8 +14,11 @@ on:
 
 permissions:
   contents: read
-  # cache-nix-action purges stale caches via the Actions API
-  actions: write
+
+env:
+  # secrets are not available in step-level if:, so gate the cachix steps
+  # through the env context (empty on fork PRs and until the token is set)
+  CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -27,6 +30,11 @@ jobs:
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
+      - uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
+        if: env.CACHIX_AUTH_TOKEN != ''
+        with:
+          name: toof-jp
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - run: nix flake check ./nix --all-systems
 
   build-linux:
@@ -53,18 +61,11 @@ jobs:
 
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
 
-      - name: Restore/save Nix store cache
-        uses: nix-community/cache-nix-action@7df957e333c1e5da7721f60227dbba6d06080569 # v7
+      - uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
+        if: env.CACHIX_AUTH_TOKEN != ''
         with:
-          primary-key: nix-${{ runner.os }}-${{ matrix.name }}-${{ hashFiles('nix/flake.lock', 'nix/**/*.nix') }}
-          restore-prefixes-first-match: nix-${{ runner.os }}-${{ matrix.name }}-
-          # Keep each cache small enough that the 10GB repo cache quota
-          # holds all four jobs without evicting each other
-          gc-max-store-size-linux: 2G
-          purge: true
-          purge-prefixes: nix-${{ runner.os }}-${{ matrix.name }}-
-          purge-created: 0
-          purge-primary-key: never
+          name: toof-jp
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Build ${{ matrix.attr }}
         run: nix build './nix#${{ matrix.attr }}' --no-link --print-build-logs
@@ -75,16 +76,11 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
 
-      - name: Restore/save Nix store cache
-        uses: nix-community/cache-nix-action@7df957e333c1e5da7721f60227dbba6d06080569 # v7
+      - uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
+        if: env.CACHIX_AUTH_TOKEN != ''
         with:
-          primary-key: nix-${{ runner.os }}-home-mac-${{ hashFiles('nix/flake.lock', 'nix/**/*.nix') }}
-          restore-prefixes-first-match: nix-${{ runner.os }}-home-mac-
-          gc-max-store-size-darwin: 2G
-          purge: true
-          purge-prefixes: nix-${{ runner.os }}-home-mac-
-          purge-created: 0
-          purge-primary-key: never
+          name: toof-jp
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Build homeConfigurations."toof@mac".activationPackage
         run: nix build './nix#homeConfigurations."toof@mac".activationPackage' --no-link --print-build-logs
