@@ -1,12 +1,12 @@
 # Shared Home Manager config (NixOS module / macOS standalone).
 #
-# ~/.zshrc is managed here (source of truth: ./zshrc; the repo-root .zshrc is
-# a symlink to it so the Makefile flow keeps working). The other config files
-# (git, tmux, nvim, ...) stay managed by the Makefile symlinks in this repo.
+# ~/.zshrc and the configs in ./config (git, gnupg, rustfmt, claude, herdr,
+# starship — see ./configs.nix) are managed here; the repo-root .zshrc and
+# .config/* entries are symlinks back so the Makefile flow keeps working.
+# The remaining config files (tmux, nvim, ssh, ...) stay Makefile-managed.
 { pkgs, lib, inputs, ... }:
 
 {
-<<<<<<< HEAD
   imports = [
     ./configs.nix
     ./nixvim.nix
