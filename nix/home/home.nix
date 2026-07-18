@@ -6,7 +6,11 @@
 { pkgs, lib, inputs, ... }:
 
 {
-  imports = [ ./nixvim.nix ];
+<<<<<<< HEAD
+  imports = [
+    ./configs.nix
+    ./nixvim.nix
+  ];
 
   home.stateVersion = "25.11";
 
