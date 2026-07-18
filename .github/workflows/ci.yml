@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  pull_request:
+    paths:
+      - "nix/**"
+      - ".github/workflows/ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  flake-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
+      - run: nix flake check ./nix --all-systems
+
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        attr:
+          - nixosConfigurations.dev.config.system.build.toplevel
+          - nixosConfigurations.kubevirt.config.system.build.toplevel
+          - homeConfigurations."toof@linux".activationPackage
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      # Full NixOS closures need more than the ~14GB free on a stock runner
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
+            /usr/local/share/boost /opt/hostedtoolcache
+          df -h /
+
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
+
+      - name: Build ${{ matrix.attr }}
+        run: nix build './nix#${{ matrix.attr }}' --no-link --print-build-logs
+
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
+      - name: Build homeConfigurations."toof@mac".activationPackage
+        run: nix build './nix#homeConfigurations."toof@mac".activationPackage' --no-link --print-build-logs
