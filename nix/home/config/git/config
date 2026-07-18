@@ -1,0 +1,25 @@
+[core]
+  quotepath = false
+[init]
+  defaultBranch = main
+
+[user]
+  name = Fumiya Tokumasu
+  email = toof@toof.jp
+  signingkey = 1D55316F12B1EF61
+
+[push]
+  autoSetupRemote = true
+
+[alias]
+  pull = pull --all
+
+[diff]
+  external = difft
+
+[include]
+  path = ~/.config/git/gpg.config
+[commit]
+	gpgsign = true
+[gtr "worktrees"]
+	dir = .worktrees

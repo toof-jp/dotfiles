@@ -1,13 +1,22 @@
 # Shared Home Manager config (NixOS module / macOS standalone).
 #
-# Packages only: config files (.zshrc, git, tmux, nvim, ...) stay managed by
-# the Makefile symlinks in this repo, so nothing here writes into ~/.config.
+# ~/.zshrc and the configs in ./config (git, gnupg, rustfmt, claude, herdr,
+# starship — see ./configs.nix) are managed here; the repo-root .zshrc and
+# .config/* entries are symlinks back so the Makefile flow keeps working.
+# The remaining config files (tmux, nvim, ssh, ...) stay Makefile-managed.
 { pkgs, lib, inputs, ... }:
 
 {
+  imports = [
+    ./configs.nix
+    ./nixvim.nix
+  ];
+
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
+
+  home.file.".zshrc".source = ./zshrc;
 
   home.packages = with pkgs; [
     # shell
@@ -21,11 +30,17 @@
     # git
     git
     gh
+    gh-dash # wired as a gh extension below; alias dash='gh dash'
     ghq
+    (callPackage ./git-gtr.nix { }) # git gtr — worktree runner
     difftastic # git diff.external = difft
 
     # editor / terminal
-    neovim # .config/nvim, .config/lua-nvim
+    # Plain neovim stays for the NVIM_APPNAME-based configs (.config/nvim /
+    # .config/lua-nvim, aliases ov / v). nixvim (see ./nixvim.nix) also ships
+    # a bin/nvim; hiPrio lets this one win the `nvim` name, the nixvim build
+    # is available as `nixvim`.
+    (lib.hiPrio neovim)
     tmux # .config/tmux
 
     # kubernetes
@@ -53,4 +68,9 @@
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     pinentry_mac
   ];
+
+  # gh looks for extensions in ~/.local/share/gh/extensions, not on PATH;
+  # wire gh-dash there so `gh dash` works without `gh extension install`.
+  home.file.".local/share/gh/extensions/gh-dash/gh-dash".source =
+    "${pkgs.gh-dash}/bin/gh-dash";
 }

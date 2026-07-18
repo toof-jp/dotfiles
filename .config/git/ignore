@@ -1,9 +1,1 @@
-*.out
-.ccls
-.ccls-cache/
-.vscode/
-.local_docs/
-.DS_Store
-compile_commands.json
-**/.claude/
-.worktrees/
+../../nix/home/config/git/ignore
