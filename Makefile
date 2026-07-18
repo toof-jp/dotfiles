@@ -44,11 +44,10 @@ rustfmt:
 	ln -sf ${PWD}/.config/rustfmt ${HOME}/.config
 
 claude:
-	mkdir -p ${HOME}/.config
-	mkdir -p ${HOME}/.config/claude
-	ln -sf ${PWD}/.config/claude/settings.json ${HOME}/.config/claude
-	ln -sf ${PWD}/.config/claude/CLAUDE.md ${HOME}/.config/claude
-	ln -sfn ${PWD}/.config/claude/skills ${HOME}/.config/claude/skills
+	mkdir -p ${HOME}/.claude
+	ln -sf ${PWD}/.config/claude/settings.json ${HOME}/.claude
+	ln -sf ${PWD}/.config/claude/CLAUDE.md ${HOME}/.claude
+	ln -sfn ${PWD}/.config/claude/skills ${HOME}/.claude/skills
 
 codex:
 	mkdir -p ${HOME}/.codex

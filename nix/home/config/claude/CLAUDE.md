@@ -16,7 +16,7 @@ Repositories are managed with [ghq](https://github.com/x-motemen/ghq), so this r
 
 # GHCR image publishing (CI)
 
-When a repository needs CI that builds Docker images and pushes them to ghcr.io, follow the `ghcr-publish` skill (`~/.config/claude/skills/ghcr-publish/SKILL.md` — full workflow templates live there). Key rules:
+When a repository needs CI that builds Docker images and pushes them to ghcr.io, follow the `ghcr-publish` skill (`~/.claude/skills/ghcr-publish/SKILL.md` — full workflow templates live there). Key rules:
 
 - Detect Dockerfiles first, then pick the pattern:
   - One Dockerfile at repo root → single workflow `.github/workflows/build-push.yml`, image `ghcr.io/<owner>/<repo>`.

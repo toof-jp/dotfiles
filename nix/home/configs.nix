@@ -14,18 +14,22 @@
 
     "rustfmt".source = ./config/rustfmt;
 
-    # Note: these become read-only store symlinks; Claude Code can no longer
-    # write settings.json in place.
-    "claude/settings.json".source = ./config/claude/settings.json;
-    "claude/CLAUDE.md".source = ./config/claude/CLAUDE.md;
-    "claude/skills".source = ./config/claude/skills;
-
     "herdr/config.toml".source = ./config/herdr/config.toml;
   };
 
-  # pinentry-program in this file is the homebrew mac path, so only deploy on
-  # darwin; the NixOS hosts configure gpg-agent via programs.gnupg.agent.
-  home.file.".gnupg/gpg-agent.conf" = lib.mkIf pkgs.stdenv.isDarwin {
-    source = ./config/gnupg/gpg-agent.conf;
+  home.file = {
+    # Claude Code reads its user-level config from ~/.claude (CLAUDE_CONFIG_DIR
+    # is unset), not $XDG_CONFIG_HOME/claude.
+    # Note: these become read-only store symlinks; Claude Code can no longer
+    # write settings.json in place.
+    ".claude/settings.json".source = ./config/claude/settings.json;
+    ".claude/CLAUDE.md".source = ./config/claude/CLAUDE.md;
+    ".claude/skills".source = ./config/claude/skills;
+
+    # pinentry-program in this file is the homebrew mac path, so only deploy on
+    # darwin; the NixOS hosts configure gpg-agent via programs.gnupg.agent.
+    ".gnupg/gpg-agent.conf" = lib.mkIf pkgs.stdenv.isDarwin {
+      source = ./config/gnupg/gpg-agent.conf;
+    };
   };
 }
