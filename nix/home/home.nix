@@ -1,13 +1,16 @@
 # Shared Home Manager config (NixOS module / macOS standalone).
 #
-# Packages only: config files (.zshrc, git, tmux, nvim, ...) stay managed by
-# the Makefile symlinks in this repo, so nothing here writes into ~/.config.
+# ~/.zshrc is managed here (source of truth: ./zshrc; the repo-root .zshrc is
+# a symlink to it so the Makefile flow keeps working). The other config files
+# (git, tmux, nvim, ...) stay managed by the Makefile symlinks in this repo.
 { pkgs, lib, inputs, ... }:
 
 {
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
+
+  home.file.".zshrc".source = ./zshrc;
 
   home.packages = with pkgs; [
     # shell
