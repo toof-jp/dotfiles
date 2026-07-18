@@ -1,6 +1,11 @@
 name: CI
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "nix/**"
+      - ".github/workflows/ci.yml"
   pull_request:
     paths:
       - "nix/**"
