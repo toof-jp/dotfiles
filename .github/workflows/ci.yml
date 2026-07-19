@@ -38,7 +38,7 @@ jobs:
       - run: nix flake check ./nix --all-systems
 
   build-linux:
-    runs-on: ubuntu-latest
+    runs-on: arc-dotfiles
     strategy:
       fail-fast: false
       matrix:
@@ -49,15 +49,21 @@ jobs:
             attr: nixosConfigurations.kubevirt.config.system.build.toplevel
           - name: home-linux
             attr: homeConfigurations."toof@linux".activationPackage
+    env:
+      # sandbox=false: the runner container is the isolation boundary, and
+      # the rootless sandbox cannot preserve the fsGroup setgid bits on the
+      # PVC-backed store
+      NIX_CONFIG: |-
+        experimental-features = nix-command flakes
+        sandbox = false
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
-      # Full NixOS closures need more than the ~14GB free on a stock runner
-      - name: Free disk space
-        run: |
-          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
-            /usr/local/share/boost /opt/hostedtoolcache
-          df -h /
+      # The store on the PVC survives pods, but the profile in $HOME does
+      # not, so the installer runs every time; the runner image lacks xz,
+      # which the installer needs
+      - name: Install Nix prerequisites
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq xz-utils
 
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
 
