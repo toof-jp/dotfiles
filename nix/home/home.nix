@@ -62,6 +62,7 @@
     # AI agents
     claude-code # alias c='claude'
     codex # alias cx='codex'
+    opencode
 
     # crypto
     gnupg # gpg --card-status
