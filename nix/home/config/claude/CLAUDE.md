@@ -2,6 +2,8 @@
 
 All commits must be GPG-signed. Never commit with signing disabled (e.g. `--no-gpg-sign` or `commit.gpgsign=false`) — if signing fails, stop and report the error instead of working around it.
 
+Before creating any commit, always have the staged changes reviewed by opencode first (e.g. `git diff --staged | opencode run "Review this diff and point out any problems"`). Address the issues it finds (or report them to the user) before committing.
+
 # Merge / push policy
 
 Never merge a pull request (via `gh pr merge`, `gh api`, the merge button, or any other means) without the user's explicit approval. Never push directly to `main` — always create a branch and open a pull request instead.
