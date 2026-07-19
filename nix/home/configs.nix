@@ -15,6 +15,8 @@
     "rustfmt".source = ./config/rustfmt;
 
     "herdr/config.toml".source = ./config/herdr/config.toml;
+
+    "ghostty/config".source = ./config/ghostty/config;
   };
 
   home.file = {
