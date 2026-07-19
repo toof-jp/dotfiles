@@ -7,15 +7,15 @@ let
   # Real credentials live in the untracked wifi.nix (copy wifi.nix.example).
   # Untracked files are invisible to pure git-flake evaluation, so build with
   #   nix build "path:.#visionfive2-image"
+  # Fall back to placeholders (with a warning) so `nix flake check` in CI,
+  # which never sees the untracked file, can still evaluate this config.
   wifi =
     if builtins.pathExists ./wifi.nix then
       import ./wifi.nix
     else
-      throw ''
-        hosts/visionfive2/wifi.nix is missing. Copy wifi.nix.example, fill in
-        the real credentials, and build via `nix build "path:.#visionfive2-image"`
-        (plain `.#` hides untracked files from flake evaluation).
-      '';
+      lib.warn
+        "hosts/visionfive2/wifi.nix not found; using placeholder WiFi credentials (build via `nix build \"path:.#visionfive2-image\"` to include the untracked file)"
+        (import ./wifi.nix.example);
 in
 {
   imports = [
