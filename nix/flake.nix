@@ -18,6 +18,11 @@
     # Upstream pins nixos-unstable + rust-overlay toolchain; intentionally
     # not following our nixpkgs so it builds exactly as upstream CI tests it.
     herdr.url = "github:ogulcancelik/herdr";
+
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -97,6 +102,14 @@
           system = "x86_64-linux";
           modules = [ ./hosts/iso/configuration.nix ];
         };
+
+        # StarFive VisionFive 2 (riscv64), cross-built from x86_64.
+        # Needs the untracked hosts/visionfive2/wifi.nix, so build with
+        #   nix build "path:.#visionfive2-image"
+        visionfive2 = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/visionfive2/configuration.nix ];
+        };
       };
 
       # Minimal qcow2 for KubeVirt:
@@ -117,6 +130,10 @@
       # Installer ISO for physical machines (NUC): nix build .#iso
       packages.x86_64-linux.iso =
         self.nixosConfigurations.installer.config.system.build.isoImage;
+
+      # SD image for the VisionFive 2 (dd it to the card as-is)
+      packages.x86_64-linux.visionfive2-image =
+        self.nixosConfigurations.visionfive2.config.system.build.sdImage;
 
       homeConfigurations = {
         # Apple Silicon Mac: nix run home-manager -- switch --flake .#toof@mac
