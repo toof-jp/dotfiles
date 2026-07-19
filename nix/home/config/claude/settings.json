@@ -17,6 +17,7 @@
       "Bash(uv *)",
       "Bash(op read *)",
       "Bash(opencode *)",
+      "Bash(pinact *)",
       "Bash(docker *)",
       "Bash(docker-compose *)",
       "Bash(printf *)",
