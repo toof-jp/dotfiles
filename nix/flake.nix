@@ -83,6 +83,20 @@
           system = "x86_64-linux";
           modules = [ ./hosts/kubevirt/base.nix ];
         };
+
+        # Intel NUC: Kubernetes node (tailscale + kubeadm), installed from
+        # the minimal ISO below
+        nuc = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/nuc/configuration.nix ];
+        };
+
+        # Minimal installer ISO: boot + network + SSH; the real system is
+        # pulled over the network with nixos-install --flake
+        installer = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/iso/configuration.nix ];
+        };
       };
 
       # Minimal qcow2 for KubeVirt:
@@ -99,6 +113,10 @@
           diskSize = "auto";
           additionalSpace = "2048M"; # slack until the first-boot resize
         };
+
+      # Installer ISO for physical machines (NUC): nix build .#iso
+      packages.x86_64-linux.iso =
+        self.nixosConfigurations.installer.config.system.build.isoImage;
 
       homeConfigurations = {
         # Apple Silicon Mac: nix run home-manager -- switch --flake .#toof@mac
