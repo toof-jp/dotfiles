@@ -14,6 +14,7 @@
       "Bash(jq *)",
       "Bash(python *)",
       "Bash(python3 *)",
+      "Bash(op read *)",
       "Bash(kubectl get *)",
       "Bash(kubectl describe *)",
       "Bash(kubectl logs *)",
