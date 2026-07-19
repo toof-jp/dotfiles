@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -23,12 +24,22 @@
     let
       username = "toof";
 
+      overlays = [
+        # 25.11's gh-dash 4.18.0 panics on narrow sidebars (negative
+        # strings.Repeat count in the checks bar); fixed upstream in 4.25.2
+        (final: prev: {
+          gh-dash =
+            inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.gh-dash;
+        })
+      ];
+
       mkPkgs = system: import nixpkgs {
-        inherit system;
+        inherit system overlays;
         config.allowUnfree = true; # claude-code etc.
       };
 
       homeManagerModules = [
+        { nixpkgs.overlays = overlays; }
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
