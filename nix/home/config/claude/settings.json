@@ -20,6 +20,7 @@
       "Bash(pinact *)",
       "Bash(docker *)",
       "Bash(docker-compose *)",
+      "Bash(terraform *)",
       "Bash(printf *)",
       "Bash(sed *)",
       "Bash(echo)",
