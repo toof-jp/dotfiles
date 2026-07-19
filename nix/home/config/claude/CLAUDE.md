@@ -39,4 +39,6 @@ git gtr rm <branch>        # remove it when done
 git gtr ls                 # list worktrees
 ```
 
+After a pull request is merged, remove its local worktree with `git gtr rm <branch>`.
+
 Worktrees are created under `.worktrees/` inside the repo (`gtr.worktrees.dir = .worktrees`, set globally). This directory is ignored via the global gitignore (`.config/git/ignore`), so it never needs to be added per-repo.
