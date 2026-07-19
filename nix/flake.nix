@@ -89,6 +89,20 @@
           modules = [ ./hosts/kubevirt/base.nix ];
         };
 
+        # Intel NUC: Kubernetes node (tailscale + kubeadm), installed from
+        # the minimal ISO below
+        nuc = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/nuc/configuration.nix ];
+        };
+
+        # Minimal installer ISO: boot + network + SSH; the real system is
+        # pulled over the network with nixos-install --flake
+        installer = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/iso/configuration.nix ];
+        };
+
         # StarFive VisionFive 2 (riscv64), cross-built from x86_64.
         # Needs the untracked hosts/visionfive2/wifi.nix, so build with
         #   nix build "path:.#visionfive2-image"
@@ -112,6 +126,10 @@
           diskSize = "auto";
           additionalSpace = "2048M"; # slack until the first-boot resize
         };
+
+      # Installer ISO for physical machines (NUC): nix build .#iso
+      packages.x86_64-linux.iso =
+        self.nixosConfigurations.installer.config.system.build.isoImage;
 
       # SD image for the VisionFive 2 (dd it to the card as-is)
       packages.x86_64-linux.visionfive2-image =
