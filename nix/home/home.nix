@@ -63,6 +63,7 @@
     claude-code # alias c='claude'
     codex # alias cx='codex'
     opencode
+    (callPackage ./kimi.nix { }) # kimi — Claude Code on Kimi K3
 
     # crypto
     gnupg # gpg --card-status
