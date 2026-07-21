@@ -1,0 +1,13 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: ["config:recommended", ":dependencyDashboard"],
+  // Only track Nix flake inputs for now; leave GitHub Actions to pinact.
+  enabledManagers: ["nix"],
+  nix: {
+    enabled: true,
+  },
+  // Keep flake.lock fresh even when no input's ref changes (branch pins move).
+  lockFileMaintenance: {
+    enabled: true,
+  },
+}
