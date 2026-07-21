@@ -4,7 +4,12 @@ on:
   push:
     branches: [main]
     paths:
-      - "nix/**"
+      # kubevirt-image uses nixosConfigurations.kubevirt-base
+      # (nix/hosts/kubevirt/base.nix). Everything else in nix/ is unrelated.
+      - "nix/flake.nix"
+      - "nix/flake.lock"
+      - "nix/hosts/kubevirt/**"
+      - "nix/containerdisk/**"
       - ".github/workflows/vm-image.yml"
   workflow_dispatch:
 
