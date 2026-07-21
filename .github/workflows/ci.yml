@@ -25,11 +25,75 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Which flake outputs a PR/push actually needs to rebuild. `home` covers
+  # the shared inputs used by every downstream config (home-manager + the
+  # flake itself); `dev` / `kubevirt` layer host-specific paths on top so
+  # only the affected NixOS closure runs.
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      home: ${{ steps.matrix.outputs.home }}
+      dev: ${{ steps.matrix.outputs.dev }}
+      kubevirt: ${{ steps.matrix.outputs.kubevirt }}
+      linux_matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      # workflow_dispatch has no diff to work from — force every build in
+      # that case (see the matrix step below).
+      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+        if: github.event_name != 'workflow_dispatch'
+        id: filter
+        with:
+          filters: |
+            home: &home
+              - '.github/workflows/ci.yml'
+              - 'nix/flake.nix'
+              - 'nix/flake.lock'
+              - 'nix/home/**'
+            dev:
+              - *home
+              - 'nix/hosts/dev/**'
+            kubevirt:
+              - *home
+              - 'nix/hosts/kubevirt/**'
+      - id: matrix
+        env:
+          EVENT: ${{ github.event_name }}
+          DEV: ${{ steps.filter.outputs.dev }}
+          KUBEVIRT: ${{ steps.filter.outputs.kubevirt }}
+          HOME_CHANGED: ${{ steps.filter.outputs.home }}
+        run: |
+          if [[ "$EVENT" == "workflow_dispatch" ]]; then
+            DEV=true; KUBEVIRT=true; HOME_CHANGED=true
+          fi
+          include=()
+          if [[ "$DEV" == "true" ]]; then
+            include+=('{"name":"nixos-dev","attr":"nixosConfigurations.dev.config.system.build.toplevel"}')
+          fi
+          if [[ "$KUBEVIRT" == "true" ]]; then
+            include+=('{"name":"nixos-kubevirt","attr":"nixosConfigurations.kubevirt.config.system.build.toplevel"}')
+          fi
+          if [[ "$HOME_CHANGED" == "true" ]]; then
+            include+=('{"name":"home-linux","attr":"homeConfigurations.\"toof@linux\".activationPackage"}')
+          fi
+          joined=$(IFS=,; printf '%s' "${include[*]}")
+          {
+            echo "matrix={\"include\":[${joined}]}"
+            echo "home=$HOME_CHANGED"
+            echo "dev=$DEV"
+            echo "kubevirt=$KUBEVIRT"
+          } >> "$GITHUB_OUTPUT"
+
   flake-check:
+    needs: changes
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
+        with:
+          extra_nix_config: |
+            http-connections = 128
+            max-substitution-jobs = 128
       - uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
         if: env.CACHIX_AUTH_TOKEN != ''
         with:
@@ -38,28 +102,32 @@ jobs:
       - run: nix flake check ./nix --all-systems
 
   build-linux:
+    needs: changes
+    if: needs.changes.outputs.dev == 'true' || needs.changes.outputs.kubevirt == 'true' || needs.changes.outputs.home == 'true'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - name: nixos-dev
-            attr: nixosConfigurations.dev.config.system.build.toplevel
-          - name: nixos-kubevirt
-            attr: nixosConfigurations.kubevirt.config.system.build.toplevel
-          - name: home-linux
-            attr: homeConfigurations."toof@linux".activationPackage
+      matrix: ${{ fromJSON(needs.changes.outputs.linux_matrix) }}
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
-      # Full NixOS closures need more than the ~14GB free on a stock runner
+      # Full NixOS closures need more than the ~14GB free on a stock runner.
+      # Delete in parallel so we're not serialising ~40GB of `rm -rf` I/O.
       - name: Free disk space
         run: |
-          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
-            /usr/local/share/boost /opt/hostedtoolcache
+          sudo rm -rf /usr/local/lib/android &
+          sudo rm -rf /usr/share/dotnet &
+          sudo rm -rf /opt/ghc &
+          sudo rm -rf /usr/local/share/boost &
+          sudo rm -rf /opt/hostedtoolcache &
+          wait
           df -h /
 
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
+        with:
+          extra_nix_config: |
+            http-connections = 128
+            max-substitution-jobs = 128
 
       - uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
         if: env.CACHIX_AUTH_TOKEN != ''
@@ -71,10 +139,16 @@ jobs:
         run: nix build './nix#${{ matrix.attr }}' --no-link --print-build-logs
 
   build-mac:
+    needs: changes
+    if: needs.changes.outputs.home == 'true'
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
+        with:
+          extra_nix_config: |
+            http-connections = 128
+            max-substitution-jobs = 128
 
       - uses: cachix/cachix-action@5f2d7c5294214f71b873db4b969586b980625e71 # v17
         if: env.CACHIX_AUTH_TOKEN != ''
