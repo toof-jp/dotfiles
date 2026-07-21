@@ -1,11 +1,16 @@
-# Intel NUC: Kubernetes node (kubeadm) reachable over Tailscale.
+# Intel NUC: Kubernetes control plane node (kubeadm) reachable over Tailscale.
 #
 # Install from the minimal ISO (nix build .#iso), partition with an ESP
 # labeled BOOT (vfat) and a root labeled nixos (ext4), then:
 #
 #   nixos-install --flake 'github:toof-jp/dotfiles?dir=nix#nuc'
 #
-# After first boot: `tailscale up`, then `kubeadm join ...`.
+# After first boot: `tailscale up`, then `kubeadm init ...`
+# (or `kubeadm join --control-plane ...` to join an existing HA cluster).
+# The apiserver / controller-manager / scheduler / etcd run as static pods
+# under kubelet; no extra system config is needed beyond the worker setup
+# because tailscale0 is a trusted interface (all control-plane ports open
+# over the tailnet).
 { config, pkgs, ... }:
 
 {
@@ -62,11 +67,13 @@
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
 
-  # --- kubeadm node ---------------------------------------------------
+  # --- kubeadm control plane -----------------------------------------
   # NixOS has no kubeadm module; this recreates what the upstream deb/rpm
   # packages set up: containerd (systemd cgroups), the kubelet unit with
   # kubeadm's drop-in semantics, kernel prerequisites, and CNI plugins in
   # a writable /opt/cni/bin (CNI DaemonSets copy their binaries there).
+  # For a control plane the apiserver / controller-manager / scheduler /
+  # etcd run as static pods managed by the same kubelet.
 
   boot.kernelModules = [ "br_netfilter" "overlay" ];
   boot.kernel.sysctl = {
@@ -120,7 +127,8 @@
       kubernetes
     ];
     # Mirrors kubeadm's 10-kubeadm.conf drop-in; the referenced files are
-    # created by `kubeadm join`, so the unit keeps restarting until then
+    # created by `kubeadm init` (or `join`), so the unit keeps restarting
+    # until then
     environment = {
       KUBELET_KUBECONFIG_ARGS = "--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf";
       KUBELET_CONFIG_ARGS = "--config=/var/lib/kubelet/config.yaml";
