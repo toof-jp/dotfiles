@@ -105,6 +105,9 @@
     environment = {
       KUBELET_KUBECONFIG_ARGS = "--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf";
       KUBELET_CONFIG_ARGS = "--config=/var/lib/kubelet/config.yaml";
+      # Cluster traffic flows over tailnet; without this kubelet advertises
+      # the LAN IP and pod-to-pod routing via the CNI breaks
+      KUBELET_EXTRA_ARGS = "--node-ip=100.112.113.18";
     };
     serviceConfig = {
       ExecStart = "${pkgs.kubernetes}/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $KUBELET_KUBEADM_ARGS $KUBELET_EXTRA_ARGS";
