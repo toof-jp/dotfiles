@@ -90,10 +90,23 @@
         };
 
         # Intel NUC: Kubernetes node (tailscale + kubeadm), installed from
-        # the minimal ISO below
+        # the minimal ISO below.
+        # kubernetes / cri-tools come from nixpkgs-unstable so the control
+        # plane stays on the same minor as the workers in nix-sandbox (both
+        # currently 1.36.x); nixos-25.11 lags at 1.34.
         nuc = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./hosts/nuc/configuration.nix ];
+          modules = [
+            ./hosts/nuc/configuration.nix
+            {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  inherit (inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system})
+                    kubernetes cri-tools;
+                })
+              ];
+            }
+          ];
         };
 
         # Minimal installer ISO: boot + network + SSH; the real system is
