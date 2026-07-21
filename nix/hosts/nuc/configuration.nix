@@ -14,6 +14,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./tv-tuner.nix
+  ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Lets plain `sudo nixos-rebuild switch` work on the node (nixos-rebuild
