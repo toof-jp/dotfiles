@@ -83,8 +83,10 @@
     };
   };
 
+  # Two rules targeting the same path are rejected by systemd-tmpfiles as
+  # a duplicate, so create the parent and let C+ create/populate bin itself
   systemd.tmpfiles.rules = [
-    "d /opt/cni/bin 0755 root root -"
+    "d /opt/cni 0755 root root -"
     # C+ re-copies every boot so cni-plugins updates propagate; extra
     # binaries dropped in by CNI DaemonSets are left alone
     "C+ /opt/cni/bin - - - - ${pkgs.cni-plugins}/bin"
