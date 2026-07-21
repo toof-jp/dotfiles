@@ -50,6 +50,11 @@
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
 
+  # kubeadm-generated kubelet config pins resolvConf to
+  # /run/systemd/resolve/resolv.conf, so systemd-resolved must be running
+  # or pod sandboxes fail to start
+  services.resolved.enable = true;
+
   services.tailscale.enable = true;
   networking.firewall = {
     # Cluster traffic flows over the tailnet; nothing but SSH on the LAN
