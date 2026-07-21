@@ -98,6 +98,10 @@
     # C+ re-copies every boot so cni-plugins updates propagate; extra
     # binaries dropped in by CNI DaemonSets are left alone
     "C+ /opt/cni/bin - - - - ${pkgs.cni-plugins}/bin"
+    # longhorn-manager nsenter's into the host mount ns and exec's
+    # `iscsiadm` with its container's PATH (/usr/local/sbin:...:/sbin);
+    # none of those paths are populated on NixOS, so shim iscsiadm there
+    "L+ /usr/local/sbin/iscsiadm - - - - ${pkgs.openiscsi}/bin/iscsiadm"
   ];
 
   systemd.services.kubelet = {
