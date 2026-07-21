@@ -83,6 +83,14 @@
     };
   };
 
+  # Longhorn provisions block volumes via iSCSI, so longhorn-manager needs
+  # iscsiadm on the host — without it the pod exits with "please make sure
+  # you have iscsiadm/open-iscsi installed on the host"
+  services.openiscsi = {
+    enable = true;
+    name = "iqn.2026-07.jp.toof:nuc";
+  };
+
   # Two rules targeting the same path are rejected by systemd-tmpfiles as
   # a duplicate, so create the parent and let C+ create/populate bin itself
   systemd.tmpfiles.rules = [
