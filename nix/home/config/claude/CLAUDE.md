@@ -16,6 +16,10 @@ Never post comments on pull requests (review comments, inline comments, or repli
 
 Repositories are managed with [ghq](https://github.com/x-motemen/ghq), so this repo lives under `~/ghq/github.com/toof-jp/dotfiles` rather than a flat `~/dotfiles` path.
 
+# Creating new GitHub repositories
+
+New GitHub repositories under `toof-jp` are managed declaratively by [`toof-jp/github-repository-terraform`](https://github.com/toof-jp/github-repository-terraform) (`~/ghq/github.com/toof-jp/github-repository-terraform`). Do not create repositories via `gh repo create` or the web UI — instead, add a new entry to `repositories.json` in that repo and run `terraform apply` so the repo is created with the correct attributes and tracked in state.
+
 # GHCR image publishing (CI)
 
 When a repository needs CI that builds Docker images and pushes them to ghcr.io, follow the `ghcr-publish` skill (`~/.claude/skills/ghcr-publish/SKILL.md` — full workflow templates live there). Key rules:
