@@ -43,6 +43,24 @@
         config.allowUnfree = true; # claude-code etc.
       };
 
+      # kubernetes / cri-tools come from nixpkgs-unstable so every host in
+      # our kubeadm clusters (nuc, sakura-vps, vultr-vps, oci-vps) stays on
+      # the same minor. Applied as its own module so hosts that don't need
+      # anything else k8s-specific just get the pin.
+      kubernetesOverlayModule = {
+        nixpkgs.overlays = [
+          (final: prev: {
+            inherit (inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system})
+              kubernetes cri-tools;
+          })
+        ];
+      };
+
+      mkK8sVps = configPath: nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [ configPath kubernetesOverlayModule ];
+      };
+
       homeManagerModules = [
         { nixpkgs.overlays = overlays; }
         home-manager.nixosModules.home-manager
@@ -89,31 +107,40 @@
           modules = [ ./hosts/kubevirt/base.nix ];
         };
 
-        # Intel NUC: Kubernetes node (tailscale + kubeadm), installed from
-        # the minimal ISO below.
-        # kubernetes / cri-tools come from nixpkgs-unstable so the control
-        # plane stays on the same minor as the workers in nix-sandbox (both
-        # currently 1.36.x); nixos-25.11 lags at 1.34.
+        # Intel NUC: Kubernetes control-plane node (tailscale + kubeadm),
+        # installed from the minimal ISO below.
         nuc = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [
-            ./hosts/nuc/configuration.nix
-            {
-              nixpkgs.overlays = [
-                (final: prev: {
-                  inherit (inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system})
-                    kubernetes cri-tools;
-                })
-              ];
-            }
-          ];
+          modules = [ ./hosts/nuc/configuration.nix kubernetesOverlayModule ];
         };
 
-        # Minimal installer ISO: boot + network + SSH; the real system is
+        # Cheap-VPS kubeadm nodes joining the zen2 cluster over Tailscale.
+        # No home-manager here (heavy to build/fetch on small VPSs); vim is
+        # in environment.systemPackages via modules/k8s-vps.nix.
+        sakura-vps = mkK8sVps ./hosts/sakura-vps/configuration.nix;
+        vultr-vps = mkK8sVps ./hosts/vultr-vps/configuration.nix;
+
+        # Converted in place with nixos-infect (OCI can't boot the custom
+        # installer ISOs), so there is no oci-installer target.
+        oci-vps = mkK8sVps ./hosts/oci-vps/configuration.nix;
+
+        # Minimal installer ISOs: boot + network + SSH; the real system is
         # pulled over the network with nixos-install --flake
         installer = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./hosts/iso/configuration.nix ];
+        };
+
+        # `make sakura-iso` / `make vultr-iso` build the custom installer
+        # ISOs to upload/mount via each provider's control panel (or, for
+        # Vultr, vultr_iso_private in toof-jp/infra terraform).
+        sakura-installer = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/sakura-vps/installer.nix ];
+        };
+        vultr-installer = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./hosts/vultr-vps/installer.nix ];
         };
 
         # StarFive VisionFive 2 (riscv64), cross-built from x86_64.
@@ -143,6 +170,15 @@
       # Installer ISO for physical machines (NUC): nix build .#iso
       packages.x86_64-linux.iso =
         self.nixosConfigurations.installer.config.system.build.isoImage;
+
+      # Provider-specific installer ISOs baked with the SSH key + install
+      # script (and, for Sakura, static networking):
+      #   nix build .#sakura-installer-iso
+      #   nix build .#vultr-installer-iso
+      packages.x86_64-linux.sakura-installer-iso =
+        self.nixosConfigurations.sakura-installer.config.system.build.isoImage;
+      packages.x86_64-linux.vultr-installer-iso =
+        self.nixosConfigurations.vultr-installer.config.system.build.isoImage;
 
       # SD image for the VisionFive 2 (dd it to the card as-is)
       packages.x86_64-linux.visionfive2-image =
