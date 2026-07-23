@@ -33,5 +33,14 @@
     ".gnupg/gpg-agent.conf" = lib.mkIf pkgs.stdenv.isDarwin {
       source = ./config/gnupg/gpg-agent.conf;
     };
+
+    # Non-Darwin hosts receive gpg SSH-forwarded from a Mac (see
+    # .ssh/config.mac RemoteForward of S.gpg-agent). Without no-autostart,
+    # invoking `gpg` spawns a local gpg-agent + scdaemon that rebind the
+    # forwarded socket and break `gpg --card-status`. zshrc launches the
+    # agent explicitly for non-SSH sessions, so local usage still works.
+    ".gnupg/gpg.conf" = lib.mkIf (!pkgs.stdenv.isDarwin) {
+      source = ./config/gnupg/gpg.conf;
+    };
   };
 }
