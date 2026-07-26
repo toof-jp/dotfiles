@@ -73,14 +73,14 @@
       ];
 
       # Standalone home-manager (macOS and non-NixOS Linux)
-      mkHome = { system, homeDirectory, extraModules ? [ ] }:
+      mkHome = { system, homeDirectory, homeUsername ? username, extraModules ? [ ] }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = mkPkgs system;
           extraSpecialArgs = { inherit inputs; };
           modules = [
             ./home/home.nix
             {
-              home.username = username;
+              home.username = homeUsername;
               home.homeDirectory = homeDirectory;
             }
           ] ++ extraModules;
@@ -199,6 +199,16 @@
             # session vars / XDG integration for distros other than NixOS
             { targets.genericLinux.enable = true; }
           ];
+        };
+
+        # Work Mac (Apple Silicon): same person, different local account name
+        # (fumiya_tokumasu instead of toof), so home.username/homeDirectory
+        # are overridden instead of reusing the toof@mac defaults.
+        # nix run home-manager -- switch --flake .#fumiya_tokumasu@mac
+        "fumiya_tokumasu@mac" = mkHome {
+          system = "aarch64-darwin";
+          homeUsername = "fumiya_tokumasu";
+          homeDirectory = "/Users/fumiya_tokumasu";
         };
       };
     };
