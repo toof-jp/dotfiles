@@ -37,9 +37,10 @@ When a repository needs CI that builds Docker images and pushes them to ghcr.io,
 
 # Worktree management
 
-Always start new work by creating a worktree with `git gtr new` first, then work inside it — never work directly in the main checkout.
+Every new task starts with two steps, in this order:
 
-Before creating a worktree, update `main` in the main checkout first (e.g. `git pull --ff-only` on `main`) so the new worktree branches off the latest `main`.
+1. In the main checkout, run `git switch main && git pull --ff-only` so the next worktree branches off the latest `main`.
+2. Run `git gtr new <branch>` to create a worktree, and work inside it — never work directly in the main checkout.
 
 Use `git gtr` (git-worktree-runner) to create git worktrees instead of `git worktree add`.
 
