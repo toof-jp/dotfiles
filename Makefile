@@ -12,6 +12,7 @@ git:
 	mkdir -p ${HOME}/.config/git
 	ln -sf ${PWD}/.config/git/config ${HOME}/.config/git
 	ln -sf ${PWD}/.config/git/ignore ${HOME}/.config/git
+	ln -sf ${PWD}/.config/git/allowed_signers ${HOME}/.config/git
 
 # optional
 gpg: git

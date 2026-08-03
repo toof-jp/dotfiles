@@ -6,7 +6,15 @@
 [user]
   name = Fumiya Tokumasu
   email = toof@toof.jp
-  signingkey = 1D55316F12B1EF61
+  # Secretive (Secure Enclave) key; the literal pubkey (not a file path) so
+  # signing also works on remote hosts over agent forwarding.
+  signingkey = key::ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNkKotxXrjk86I7DxMDmpozCND0mKCUNG+NGdzZUTufpFIfNCMaHWznu3DQ8aCJ4vGs5Z9TkXDd6XpQYkNp/wRQ= toof@toof.jp
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  allowedSignersFile = ~/.config/git/allowed_signers
 
 [push]
   autoSetupRemote = true
