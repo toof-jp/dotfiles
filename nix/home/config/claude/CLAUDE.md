@@ -1,6 +1,6 @@
 # Commit policy
 
-All commits must be GPG-signed. Never commit with signing disabled (e.g. `--no-gpg-sign` or `commit.gpgsign=false`) — if signing fails, stop and report the error instead of working around it.
+All commits must be signed with the SSH (Secretive) key. Never commit with signing disabled (e.g. `--no-gpg-sign` or `commit.gpgsign=false`) — if signing fails, stop and report the error instead of working around it (this usually means the Secretive agent is not reachable, e.g. no agent forwarding on a remote host).
 
 Before creating any commit, always have the staged changes reviewed by opencode first (e.g. `git diff --staged | opencode run "Review this diff and point out any problems"`). Address the issues it finds (or report them to the user) before committing.
 
