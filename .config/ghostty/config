@@ -1,0 +1,11 @@
+# Ghostty Configuration
+
+font-family = JetBrains Mono
+font-family = Hiragino Sans
+
+# Note: To open SSH in new window, run this command:
+# open -na Ghostty.app --args -e ssh zen2
+#
+# You can also use macOS Shortcuts app or Karabiner-Elements
+# to bind Cmd+Opt+S to run the shell script at:
+# ~/.config/ghostty/ssh-zen2.sh
