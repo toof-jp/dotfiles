@@ -11,6 +11,7 @@
     # extra GPG bits remain per-machine opt-in; git ignores a missing include.
     "git/config".source = ./config/git/config;
     "git/ignore".source = ./config/git/ignore;
+    "git/allowed_signers".source = ./config/git/allowed_signers;
 
     "rustfmt".source = ./config/rustfmt;
 
