@@ -61,22 +61,34 @@
         modules = [ configPath kubernetesOverlayModule ];
       };
 
+      # Secretive (Secure Enclave) signing keys, one per machine.
+      # Use the literal pubkey (not a file path) so `key::` works over agent
+      # forwarding on remote hosts without a local public-key file.
+      signingKeys = {
+        # Personal Mac (previous machine)
+        mac    = "key::ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNkKotxXrjk86I7DxMDmpozCND0mKCUNG+NGdzZUTufpFIfNCMaHWznu3DQ8aCJ4vGs5Z9TkXDd6XpQYkNp/wRQ= toof@toof.jp";
+        # Work Mac (M4)
+        mac-m4 = "key::ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNU7XbmSrQFInbN2d4aWPhAnX83DpxCARLLVB4n/5sLeFk0zz1+3NRJdIwXRnqzXrL4orVgE9d7PV7uGrHZfzqs= toof@secretive.m4.local";
+      };
+
       homeManagerModules = [
         { nixpkgs.overlays = overlays; }
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit inputs; };
+          # NixOS hosts are accessed via SSH agent forwarding from the personal Mac;
+          # use that machine's key so git signing works when forwarding from there.
+          home-manager.extraSpecialArgs = { inherit inputs; signingKey = signingKeys.mac; };
           home-manager.users.${username} = import ./home/home.nix;
         }
       ];
 
       # Standalone home-manager (macOS and non-NixOS Linux)
-      mkHome = { system, homeDirectory, homeUsername ? username, extraModules ? [ ] }:
+      mkHome = { system, homeDirectory, homeUsername ? username, extraModules ? [ ], signingKey }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = mkPkgs system;
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = { inherit inputs signingKey; };
           modules = [
             ./home/home.nix
             {
@@ -189,19 +201,23 @@
         "${username}@mac" = mkHome {
           system = "aarch64-darwin";
           homeDirectory = "/Users/${username}";
+          signingKey = signingKeys.mac;
         };
 
         # Non-NixOS Linux (Arch, WSL, ...): nix run home-manager -- switch --flake .#toof@linux
+        # Signing happens via agent forwarding from whichever Mac is connected;
+        # using the personal Mac key here keeps the git config in sync with that host.
         "${username}@linux" = mkHome {
           system = "x86_64-linux";
           homeDirectory = "/home/${username}";
+          signingKey = signingKeys.mac;
           extraModules = [
             # session vars / XDG integration for distros other than NixOS
             { targets.genericLinux.enable = true; }
           ];
         };
 
-        # Work Mac (Apple Silicon): same person, different local account name
+        # Work Mac (Apple Silicon, M4): same person, different local account name
         # (fumiya_tokumasu instead of toof), so home.username/homeDirectory
         # are overridden instead of reusing the toof@mac defaults.
         # nix run home-manager -- switch --flake .#fumiya_tokumasu@mac
@@ -209,6 +225,7 @@
           system = "aarch64-darwin";
           homeUsername = "fumiya_tokumasu";
           homeDirectory = "/Users/fumiya_tokumasu";
+          signingKey = signingKeys.mac-m4;
         };
       };
     };

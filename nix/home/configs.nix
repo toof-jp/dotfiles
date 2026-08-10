@@ -1,7 +1,10 @@
 # Config files managed by home-manager. The real files live in ./config; the
 # repo-root .config/* entries are symlinks back here so the Makefile flow
 # keeps working on machines without home-manager.
-{ pkgs, lib, ... }:
+#
+# signingKey is passed via extraSpecialArgs in flake.nix and is the literal
+# `key::ecdsa-sha2-nistp256 ...` string for the machine's Secretive key.
+{ pkgs, lib, signingKey, ... }:
 
 {
   xdg.configFile = {
@@ -9,7 +12,41 @@
 
     # ~/.config/git/gpg.config stays Makefile-managed (`make gpg`) so the
     # extra GPG bits remain per-machine opt-in; git ignores a missing include.
-    "git/config".source = ./config/git/config;
+    # git/config is generated (not sourced) so the signing key can be injected
+    # per machine via signingKey from flake.nix extraSpecialArgs.
+    "git/config".text = ''
+      [core]
+        quotepath = false
+      [init]
+        defaultBranch = main
+
+      [user]
+        name = Fumiya Tokumasu
+        email = toof@toof.jp
+        signingkey = ${signingKey}
+
+      [gpg]
+        format = ssh
+
+      [gpg "ssh"]
+        allowedSignersFile = ~/.config/git/allowed_signers
+
+      [push]
+        autoSetupRemote = true
+
+      [alias]
+        pull = pull --all
+
+      [diff]
+        external = difft
+
+      [include]
+        path = ~/.config/git/gpg.config
+      [commit]
+        gpgsign = true
+      [gtr "worktrees"]
+        dir = .worktrees
+    '';
     "git/ignore".source = ./config/git/ignore;
     "git/allowed_signers".source = ./config/git/allowed_signers;
 
